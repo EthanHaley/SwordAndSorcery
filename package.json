@@ -1,0 +1,26 @@
+{
+  "name": "swordsandsorcery",
+  "version": "1.0.0",
+  "description": "CIS 560 Group Project",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EthanHaley/SwordAndSorcery.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/EthanHaley/SwordAndSorcery/issues"
+  },
+  "homepage": "https://github.com/EthanHaley/SwordAndSorcery#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "bootstrap": "^3.3.7",
+    "express": "^4.16.2",
+    "handlebars": "^4.0.11",
+    "pg": "^7.4.0"
+  }
+}
