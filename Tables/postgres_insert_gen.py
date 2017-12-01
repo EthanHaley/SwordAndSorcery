@@ -125,14 +125,14 @@ create_weaps = ("""CREATE TABLE """+table_names[7]+
 # # armor(Id, name, description, type, bonus, resistance)
 create_arm = ("""CREATE TABLE """+table_names[8]+
                 """
-                    (id                 INT NOT NULL,
-                    name                VARCHAR(100) NOT NULL,
-                    description         VARCHAR(300) NOT NULL,
+                    (id                INT NOT NULL,
+                    name               VARCHAR(100) NOT NULL,
+                    description        VARCHAR(300) NOT NULL,
                     _type              VARCHAR(45) NOT NULL,
                     bonus              VARCHAR(45),
                     resistance         VARCHAR(45),
                     PRIMARY KEY(id, name, description),
-					FOREIGN KEY(id, name, description) REFERENCES items(id, name, description)
+		    FOREIGN KEY(id, name, description) REFERENCES items(id, name, description)
                     );""")
 
 # inventory(fk character_id, fk item_id, quantity)
@@ -143,8 +143,8 @@ create_inv = ("""CREATE TABLE """+table_names[5]+
                     quantity          INT NOT NULL,
                     CHECK(quantity > 0),
                     PRIMARY KEY (character_id,item_id),
-					FOREIGN KEY(character_id) REFERENCES characters(id),
-					FOREIGN KEY(item_id) REFERENCES items(id)
+		    FOREIGN KEY(character_id) REFERENCES characters(id),
+		    FOREIGN KEY(item_id) REFERENCES items(id)
                     );""")
 
 # monsters(id, name, hit_points, exp_points)
@@ -180,8 +180,6 @@ for i in range(len(table_arr)):
 
 f.close()
 ###end table creation
-
-
 
 # # customer_account(id, username, name, email, password, payment_rate)
 ##generate username, name, email, passwords, payment rates from data files
@@ -226,7 +224,6 @@ for i in range(num_parties):
 
 # # Characters(id, name, party_Id, customer_Id, race, class, level, size)
 num_chars = 2000 #arbitrary
-
 max_party_size = 7
 party_size = 0
 party_id = 1
@@ -264,7 +261,6 @@ for i in range(num_spells):
     spells_excel['C'+str(i+2)].value + #description
     "');\r\n")
 
-
 # # Spells_Known(character_id, spell_Id)
 ##Tweak?: allows spells to non-spell casters
 num_spells_known = 3200
@@ -297,7 +293,6 @@ for i in range(num_mons):
 
 # # Encounters(party_id, monster_Id, monster_deaths)
 num_enc = 800 #arbitrary
-
 monster_deaths = 10 #Tweak: arbitrary
 for i in range(num_enc):
     g.write("INSERT INTO encounters VALUES("+
@@ -327,6 +322,7 @@ for i in range(1, num_armor+1):
     armor_excel['A'+str(i+1)].value+"', '" +# name
     armor_excel['B'+str(i+1)].value +# description
     "');\r\n")
+
 # # Weapons(Id, name, description, properties, damage die, damage type)
 max_weap_id = num_weapons+num_items+1
 j = 0
@@ -340,6 +336,7 @@ for i in range(num_items+1,max_weap_id):
     weapons_excel['E'+str(j+2)].value+ # damage type
     "');\r\n")
     j+=1
+	
 # # Armor(Id, name, description, type, bonus, resistance)
 max_armor_id = num_armor+num_items+num_weapons
 j = 0
@@ -383,4 +380,5 @@ for i in range(1, (num_chars*2)+1):
     str(randint(58, 77))+ "," +# item_Id
     str(randint(1, 10))+# quantity #Tweak?: arbitrary, not smart
     ");\r\n")
+	
 g.close()
