@@ -24,7 +24,7 @@ spells_excel = wb_spells.active
 wb_monsters = openpyxl.load_workbook('monsters.xlsx')
 monsters_excel = wb_monsters.active
 
-payment_rates = [0, 15] #Tweak: Change to design. Do we have a free plan?
+payment_rates = [0, 15] #Tweak: Change to design.
 hit_die = [4,6,8,10,12,20] #Tweak: possibly unused
 races = ["Elf","Dwarf","Human","Halfling","Orc", "Dragonborn", "Tiefling", "Half-Elf", "Half-Orc"] # from PHB --Tweak
 classes = ["Paladin","Cleric","Wizard", "Rogue","Ranger", "Monk", "Sorcerer", "Druid", "Barbarian", "Bard"] # from PHB --Tweak
