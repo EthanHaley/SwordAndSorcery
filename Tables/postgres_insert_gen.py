@@ -1,4 +1,4 @@
-#Creates a basic queries.sql files
+#Creates a basic 'table.sql' and 'inserts.sql' files
 #  IMPORTANT: This will overwrite any file named 'table.sql' and 'inserts.sql'!
 
 import openpyxl #!!required: pip install openyxl
