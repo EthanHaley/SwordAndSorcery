@@ -1,9 +1,5 @@
-#Creates a basic queries.sql files
-##TO DO: check queries, check formatting of output, add violation handling,
-#  create decent party names, produce data from PHB
-#  IDEA: move table creation to another file. It will be easier to edit.
-#  IDEA #2: change excel files to add consistency to race attributes; e.g. Orc = Size Medium
-#  IMPORTANT: This will overwrite any file named 'queries.sql'!
+#Creates a basic 'table.sql' and 'inserts.sql' files
+#  IMPORTANT: This will overwrite any file named 'table.sql' and 'inserts.sql'!
 
 import openpyxl #!!required: pip install openyxl
 from random import randint
@@ -28,7 +24,7 @@ spells_excel = wb_spells.active
 wb_monsters = openpyxl.load_workbook('monsters.xlsx')
 monsters_excel = wb_monsters.active
 
-payment_rates = [0, 15] #Tweak: Change to design. Do we have a free plan?
+payment_rates = [0, 15] #Tweak: Change to design.
 hit_die = [4,6,8,10,12,20] #Tweak: possibly unused
 races = ["Elf","Dwarf","Human","Halfling","Orc", "Dragonborn", "Tiefling", "Half-Elf", "Half-Orc"] # from PHB --Tweak
 classes = ["Paladin","Cleric","Wizard", "Rogue","Ranger", "Monk", "Sorcerer", "Druid", "Barbarian", "Bard"] # from PHB --Tweak
@@ -129,14 +125,14 @@ create_weaps = ("""CREATE TABLE """+table_names[7]+
 # # armor(Id, name, description, type, bonus, resistance)
 create_arm = ("""CREATE TABLE """+table_names[8]+
                 """
-                    (id                 INT NOT NULL,
-                    name                VARCHAR(100) NOT NULL,
-                    description         VARCHAR(300) NOT NULL,
+                    (id                INT NOT NULL,
+                    name               VARCHAR(100) NOT NULL,
+                    description        VARCHAR(300) NOT NULL,
                     _type              VARCHAR(45) NOT NULL,
                     bonus              VARCHAR(45),
                     resistance         VARCHAR(45),
                     PRIMARY KEY(id, name, description),
-					FOREIGN KEY(id, name, description) REFERENCES items(id, name, description)
+		    FOREIGN KEY(id, name, description) REFERENCES items(id, name, description)
                     );""")
 
 # inventory(fk character_id, fk item_id, quantity)
@@ -147,8 +143,8 @@ create_inv = ("""CREATE TABLE """+table_names[5]+
                     quantity          INT NOT NULL,
                     CHECK(quantity > 0),
                     PRIMARY KEY (character_id,item_id),
-					FOREIGN KEY(character_id) REFERENCES characters(id),
-					FOREIGN KEY(item_id) REFERENCES items(id)
+		    FOREIGN KEY(character_id) REFERENCES characters(id),
+		    FOREIGN KEY(item_id) REFERENCES items(id)
                     );""")
 
 # monsters(id, name, hit_points, exp_points)
@@ -181,9 +177,9 @@ table_arr = [create_ca, create_parties, create_trans, create_chars,
 
 for i in range(len(table_arr)):
     f.write(table_arr[i]+"\r\n")
+
+f.close()
 ###end table creation
-
-
 
 # # customer_account(id, username, name, email, password, payment_rate)
 ##generate username, name, email, passwords, payment rates from data files
@@ -228,7 +224,6 @@ for i in range(num_parties):
 
 # # Characters(id, name, party_Id, customer_Id, race, class, level, size)
 num_chars = 2000 #arbitrary
-
 max_party_size = 7
 party_size = 0
 party_id = 1
@@ -266,26 +261,25 @@ for i in range(num_spells):
     spells_excel['C'+str(i+2)].value + #description
     "');\r\n")
 
-
 # # Spells_Known(character_id, spell_Id)
 ##Tweak?: allows spells to non-spell casters
-num_spells_known = 3201
-for i in range(1,num_spells_known):
+num_spells_known = 3200
+for i in range(1,num_spells_known+1):
     g.write("INSERT INTO spells_known VALUES("+
     str(i)+", "+ # character_id
-    str(randint(1, 10))+# spell_Id #Tweak allow multiple of same spell
+    str(randint(1, 10))+# spell_Id 
     ");\r\n")
     g.write("INSERT INTO spells_known VALUES("+
     str(i)+", "+ # character_id
-    str(randint(11, 21))+# spell_Id #Tweak allow multiple of same spell
+    str(randint(11, 21))+# spell_Id
     ");\r\n")
     g.write("INSERT INTO spells_known VALUES("+
     str(i)+", "+ # character_id
-    str(randint(22, 31))+# spell_Id #Tweak allow multiple of same spell
+    str(randint(22, 31))+# spell_Id
     ");\r\n")
     g.write("INSERT INTO spells_known VALUES("+
     str(i)+", "+ # character_id
-    str(randint(32, num_spells-1))+# spell_Id #Tweak allow multiple of same spell
+    str(randint(32, num_spells-1))+# spell_Id 
     ");\r\n")
 
 # # Monsters(Id, name, hit_points, exp_points)
@@ -298,8 +292,7 @@ for i in range(num_mons):
     ");\r\n")
 
 # # Encounters(party_id, monster_Id, monster_deaths)
-num_enc = randint(300, 500)
-
+num_enc = 800 #arbitrary
 monster_deaths = 10 #Tweak: arbitrary
 for i in range(num_enc):
     g.write("INSERT INTO encounters VALUES("+
@@ -329,6 +322,7 @@ for i in range(1, num_armor+1):
     armor_excel['A'+str(i+1)].value+"', '" +# name
     armor_excel['B'+str(i+1)].value +# description
     "');\r\n")
+
 # # Weapons(Id, name, description, properties, damage die, damage type)
 max_weap_id = num_weapons+num_items+1
 j = 0
@@ -342,6 +336,7 @@ for i in range(num_items+1,max_weap_id):
     weapons_excel['E'+str(j+2)].value+ # damage type
     "');\r\n")
     j+=1
+	
 # # Armor(Id, name, description, type, bonus, resistance)
 max_armor_id = num_armor+num_items+num_weapons
 j = 0
@@ -385,5 +380,5 @@ for i in range(1, (num_chars*2)+1):
     str(randint(58, 77))+ "," +# item_Id
     str(randint(1, 10))+# quantity #Tweak?: arbitrary, not smart
     ");\r\n")
+	
 g.close()
-f.close()

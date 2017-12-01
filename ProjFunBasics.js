@@ -9,7 +9,7 @@ module.exports = {
 
 /*Customers*/
 function listCustomers(req, res, db){
-	db.all("SELECT * FROM Customer_account", [], function(err, Customer_account){
+	db.all("SELECT * FROM customer_account", [], function(err, customer_account){
 			if(err) {
 			console.error(err);
 			res.statusCode = 500;
@@ -19,7 +19,7 @@ function listCustomers(req, res, db){
 		res.end(JSON.stringify(characters));
 	});
 }
-
+//? delete inserst id problem // don't need to give id
 function addCustomer(req, res, db) {
 	var body = "";
 	req.on("error", function(err) {
@@ -35,8 +35,8 @@ function addCustomer(req, res, db) {
 	req.on("end", function() {
 		
 		var customer = JSON.parse(body);
-		db.run("INSERT INTO Customer_account(id, username, email, password, payment_rate) VALUES (?, ?, ?, ?, ?)",
-			[customer.id, customer.username, customer.email, customer.password, customer.pay_rate],
+		db.run("INSERT INTO customer_account(username, name, email, password, payment_rate) VALUES (?, ?, ?, ?)",
+			[customer.username, customer.email, customer.password, customer.payment_rate],
 			
 			function(err) {
 				if(err) {
@@ -66,7 +66,7 @@ function updateCustomer(req, res, db) {
 	});
 	req.on("end", function() {
 		var c = JSON.parse(body);
-		db.run("UPDATE Customer_account SET id=?, username=?, name=?, email=?, password=?, payment_rate=?",
+		db.run("UPDATE customer_account SET id=?, username=?, name=?, email=?, password=?, payment_rate=?",
 			[c.id, c.username, c.name, c.email, c.password, c.payment_rate],
 			function(err) {
 				if(err) {
@@ -83,8 +83,8 @@ function updateCustomer(req, res, db) {
 }
 
 function removeCustomer(req, res, db) {
-	var c_account;
-	db.run("DELETE FROM Customers WHERE Customer_account = ?", [c_account], function(err) {
+	var c_id;
+	db.run("DELETE FROM customer_account WHERE id = ?", [c_id], function(err) {
 		if(err) {
 			console.error(err);
 			res.statusCode = 500;
@@ -102,7 +102,7 @@ function removeCustomer(req, res, db) {
 /*Transactions*/
 function listTransactions(req, res, db){
 	var c_id;
-	db.all("SELECT * FROM Transactions WHERE customer_id = ?", [c_id], function(err, Transactions){
+	db.all("SELECT * FROM transactions WHERE customer_id = ?", [c_id], function(err, transactions){
 			if(err) {
 			console.error(err);
 			res.statusCode = 500;
@@ -134,8 +134,8 @@ function addTransaction(req, res, db) {
 	req.on("end", function() {
 		
 		var t = JSON.parse(body);
-		db.run("INSERT INTO Transactions(id, customer_id, amount, date, status) VALUES (?, ?, ?, ?, ?)",
-			[t.id, t.customer_id, t.amount, t.date, t.status],
+		db.run("INSERT INTO transactions(customer_id, amount, _date, status) VALUES (?, ?, ?, ?)",
+			[t.customer_id, t.amount, t._date, t.status],
 			
 			function(err) {
 				if(err) {
@@ -165,7 +165,7 @@ function updateTransaction(req, res, db) {
 	});
 	req.on("end", function() {
 		var t = JSON.parse(body);
-		db.run("UPDATE Transaction SET id=?, customer_id=?, amount=?, date=?, status=?",
+		db.run("UPDATE transaction SET id=?, customer_id=?, amount=?, _date=?, status=?",
 			[t.id,t.customer_id,t.amount,t.date,t.status],
 			function(err) {
 				if(err) {
@@ -183,7 +183,7 @@ function updateTransaction(req, res, db) {
 
 function removeTransaction(req, res, db) {
 	var t_id;
-	db.run("DELETE FROM Transaction WHERE id = ?", [t_id], function(err) {
+	db.run("DELETE FROM transaction WHERE id = ?", [t_id], function(err) {
 		if(err) {
 			console.error(err);
 			res.statusCode = 500;
@@ -202,7 +202,7 @@ function removeTransaction(req, res, db) {
 /*Charaters*/
 function listCharacters(req, res, db){
 	var c_id;
-	db.all("SELECT * FROM Characters WHERE customer_id = ?", [c_id], function(err, Characters){
+	db.all("SELECT * FROM characters WHERE customer_id = ?", [c_id], function(err, characters){
 			if(err) {
 			console.error(err);
 			res.statusCode = 500;
@@ -234,8 +234,8 @@ function addCharacter(req, res, db) {
 	req.on("end", function() {
 		
 		var c = JSON.parse(body);
-		db.run("INSERT INTO Characters(id, name, party_id, customer_id, race, class, level, size) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
-			[c.id, c.name, c.party_id, c_customer_id, c.race, c.class, c.level, c.size],
+		db.run("INSERT INTO characters(name, party_id, customer_id, race, _class, _level, _size) VALUES (?, ?, ?, ?, ?, ?, ?)",
+			[c.name, c.party_id, c_customer_id, c.race, c._class, c.level, c.size],
 			
 			function(err) {
 				if(err) {
@@ -265,7 +265,7 @@ function updateCharacter(req, res, db) {
 	});
 	req.on("end", function() {
 		var c = JSON.parse(body);
-		db.run("UPDATE Characters SET id=?, username=?, name=?, email=?, password=?, payment_rate=?",
+		db.run("UPDATE characters SET id=?, username=?, name=?, email=?, password=?, payment_rate=?",
 			[c.id, c.name, c.party_id, c.customer_id, c.race, c.class, c.level, s.size],
 			function(err) {
 				if(err) {
@@ -283,7 +283,7 @@ function updateCharacter(req, res, db) {
 
 function removeCharacter(req, res, db) {
 	var c_id;
-	db.run("DELETE FROM Characters WHERE id = ?", [c_id], function(err) {
+	db.run("DELETE FROM characters WHERE id = ?", [c_id], function(err) {
 		if(err) {
 			console.error(err);
 			res.statusCode = 500;
@@ -300,7 +300,7 @@ function removeCharacter(req, res, db) {
 /*Spells*/ /*Spells Known*/
 function listSpellsKnown(req, res, db){
 	var c_id;
-	db.all("SELECT * FROM Spells_Known WHERE character_id = ?", [c_id], function(err, Spells_Known){
+	db.all("SELECT * FROM spells_known WHERE character_id = ?", [c_id], function(err, spells_known){
 			if(err) {
 			console.error(err);
 			res.statusCode = 500;
@@ -332,7 +332,7 @@ function addSpellKnown(req, res, db) {
 	req.on("end", function() {
 		
 		var s = JSON.parse(body);
-		db.run("INSERT INTO Spells_Known(character_id, spell_id) VALUES (?, ?)",
+		db.run("INSERT INTO spells_known(character_id, spell_id) VALUES (?, ?)",
 			[s.character_id, s.spell_id],
 			
 			function(err) {
@@ -363,7 +363,7 @@ function updateSpellKnown(req, res, db) {
 	});
 	req.on("end", function() {
 		var s = JSON.parse(body);
-		db.run("UPDATE Spells_Known SET character_id=?, spell_id=?",
+		db.run("UPDATE spells_known SET character_id=?, spell_id=?",
 			[s.character_id, s.spell_id],
 			function(err) {
 				if(err) {
@@ -382,7 +382,7 @@ function updateSpellKnown(req, res, db) {
 function removeSpellKnown(req, res, db) {
 	var c_id;
 	var s_id;
-	db.run("DELETE FROM SpellsKnown WHERE character_id = ? and spell_id = ?", [c_id, s_id], function(err) {
+	db.run("DELETE FROM spells_known WHERE character_id = ? and spell_id = ?", [c_id, s_id], function(err) {
 		if(err) {
 			console.error(err);
 			res.statusCode = 500;
@@ -399,7 +399,7 @@ function removeSpellKnown(req, res, db) {
 
 /*Just Spells*/
 function listSpells(req, res, db){
-	db.all("SELECT * FROM Spells", [], function(err, Spells){
+	db.all("SELECT * FROM spells", [], function(err, spells){
 			if(err) {
 			console.error(err);
 			res.statusCode = 500;
@@ -425,8 +425,8 @@ function addSpell(req, res, db) {
 	req.on("end", function() {
 		
 		var s = JSON.parse(body);
-		db.run("INSERT INTO Spells(id, name, spell_level, description) VALUES (?, ?, ?, ?)",
-			[s.id, s.name, s.spell_level, s.description],
+		db.run("INSERT INTO spells(name, spell_level, description) VALUES (?, ?, ?)",
+			[s.name, s.spell_level, s.description],
 			
 			function(err) {
 				if(err) {
@@ -456,7 +456,7 @@ function updateSpells(req, res, db) {
 	});
 	req.on("end", function() {
 		var s = JSON.parse(body);
-		db.run("UPDATE Customer_account SET id=?, name=?, spell_level=?, description=?",
+		db.run("UPDATE spells SET id=?, name=?, spell_level=?, description=?",
 			[s.id, s.name, s.spell_level, s.description],
 			function(err) {
 				if(err) {
@@ -474,7 +474,7 @@ function updateSpells(req, res, db) {
 
 function removeSpell(req, res, db) {
 	var s_id;
-	db.run("DELETE FROM Spells WHERE id = ?", [s_id], function(err) {
+	db.run("DELETE FROM spells WHERE id = ?", [s_id], function(err) {
 		if(err) {
 			console.error(err);
 			res.statusCode = 500;
@@ -492,7 +492,7 @@ function removeSpell(req, res, db) {
 /*Inventory*/
 function listInventory(req, res, db){
 	var c_id
-	db.all("SELECT * FROM Inventory WHERE character_id = ?", [c_id], function(err, Inventory){
+	db.all("SELECT * FROM inventory WHERE character_id = ?", [c_id], function(err, inventory){
 			if(err) {
 			console.error(err);
 			res.statusCode = 500;
@@ -524,7 +524,7 @@ function addInventory(req, res, db) {
 	req.on("end", function() {
 		
 		var i = JSON.parse(body);
-		db.run("INSERT INTO Inventory(character_id, item_id, quantity) VALUES (?, ?, ?)",
+		db.run("INSERT INTO inventory(character_id, item_id, quantity) VALUES (?, ?, ?)",
 			[i.character_id, i_item_id, i_quantity],
 			
 			function(err) {
@@ -555,7 +555,7 @@ function updateInventory(req, res, db) {
 	});
 	req.on("end", function() {
 		var i = JSON.parse(body);
-		db.run("UPDATE Inventory SET character_id=?, item_id=? quantity=?",
+		db.run("UPDATE inventory SET character_id=?, item_id=? quantity=?",
 			[i.character_id, i.item_id, i.quantity],
 			function(err) {
 				if(err) {
@@ -574,7 +574,7 @@ function updateInventory(req, res, db) {
 function removeInventory(req, res, db) {
 	var c_id;
 	var i_id;
-	db.run("DELETE FROM Inventory WHERE character_id = ? and item_id = ?", [c_id, i_id], function(err) {
+	db.run("DELETE FROM inventory WHERE character_id = ? and item_id = ?", [c_id, i_id], function(err) {
 		if(err) {
 			console.error(err);
 			res.statusCode = 500;
@@ -587,7 +587,7 @@ function removeInventory(req, res, db) {
 
 /*Items*/
 function listItems(req, res, db){
-	db.all("SELECT * FROM Items", [], function(err, Items){
+	db.all("SELECT * FROM items", [], function(err, items){
 			if(err) {
 			console.error(err);
 			res.statusCode = 500;
@@ -612,8 +612,8 @@ function addItem(req, res, db) {
 	req.on("end", function() {
 		
 		var i = JSON.parse(body);
-		db.run("INSERT INTO Items(id, name,description) VALUES (?, ?, ?)",
-			[i.id, i.name, i.description],
+		db.run("INSERT INTO items(name,description) VALUES (?, ?, ?)",
+			[i.name, i.description],
 			
 			function(err) {
 				if(err) {
@@ -643,7 +643,7 @@ function updateItem(req, res, db) {
 	});
 	req.on("end", function() {
 		var i = JSON.parse(body);
-		db.run("UPDATE Items SET id=?, name=?, description=?",
+		db.run("UPDATE items SET id=?, name=?, description=?",
 			[i.id, i.name, i.description],
 			function(err) {
 				if(err) {
@@ -661,7 +661,7 @@ function updateItem(req, res, db) {
 
 function removeItem(req, res, db) {
 	var i_id;
-	db.run("DELETE FROM Items WHERE id = ?", [i_id], function(err) {
+	db.run("DELETE FROM items WHERE id = ?", [i_id], function(err) {
 		if(err) {
 			console.error(err);
 			res.statusCode = 500;
@@ -677,7 +677,7 @@ function removeItem(req, res, db) {
 
 /*Weapons*/
 function listWeapons(req, res, db){
-	db.all("SELECT * FROM Weapons", [], function(err, Weapons){
+	db.all("SELECT * FROM weapons", [], function(err, weapons){
 			if(err) {
 			console.error(err);
 			res.statusCode = 500;
@@ -703,7 +703,7 @@ function addWeapon(req, res, db) {
 	req.on("end", function() {
 		
 		var w = JSON.parse(body);
-		db.run("INSERT INTO Weapons(id, properties, damage, type) VALUES (?, ?, ?, ?)",
+		db.run("INSERT INTO weapons(id, properties, damage_die, damage_type) VALUES (?, ?, ?, ?)",
 			[w.id, w.properties, w.damage, w.type],
 			
 			function(err) {
@@ -734,7 +734,7 @@ function updateWeapons(req, res, db) {
 	});
 	req.on("end", function() {
 		var w = JSON.parse(body);
-		db.run("UPDATE Weapons SET id=?, properties=?, die=?, type=?",
+		db.run("UPDATE weapons SET id=?, properties=?, damage_die=?, damage_type=?",
 			[w.id, w.properties, w.die, w.type],
 			function(err) {
 				if(err) {
@@ -752,7 +752,7 @@ function updateWeapons(req, res, db) {
 
 function removeWeapon(req, res, db) {
 	var i_id;
-	db.run("DELETE FROM Weapons WHERE id = ?", [i_id], function(err) {
+	db.run("DELETE FROM weapons WHERE id = ?", [i_id], function(err) {
 		if(err) {
 			console.error(err);
 			res.statusCode = 500;
@@ -768,7 +768,7 @@ function removeWeapon(req, res, db) {
 
 /*Armor*/
 function listArmor(req, res, db){
-	db.all("SELECT * FROM Armor", [], function(err, Armor){
+	db.all("SELECT * FROM armor", [], function(err, armor){
 			if(err) {
 			console.error(err);
 			res.statusCode = 500;
@@ -794,7 +794,7 @@ function updateArmor(req, res, db) {
 	});
 	req.on("end", function() {
 		var a = JSON.parse(body);
-		db.run("UPDATE Weapons SET id=?, type=?, bonus=?, resistance=?",
+		db.run("UPDATE armor SET id=?, _type=?, bonus=?, resistance=?",
 			[a.id, a.type, a.bonus, a.resistance],
 			function(err) {
 				if(err) {
@@ -812,7 +812,7 @@ function updateArmor(req, res, db) {
 
 function removeArmor(req, res, db) {
 	var i_id;
-	db.run("DELETE FROM Armor WHERE id = ?", [i_id], function(err) {
+	db.run("DELETE FROM armor WHERE id = ?", [i_id], function(err) {
 		if(err) {
 			console.error(err);
 			res.statusCode = 500;
@@ -825,7 +825,7 @@ function removeArmor(req, res, db) {
 
 /*Parties*/
 function listParties(req, res, db){
-	db.all("SELECT * FROM Parties", [], function(err, Parties){
+	db.all("SELECT * FROM parties", [], function(err, parties){
 			if(err) {
 			console.error(err);
 			res.statusCode = 500;
@@ -851,8 +851,8 @@ function addParty(req, res, db) {
 	req.on("end", function() {
 		
 		var p = JSON.parse(body);
-		db.run("INSERT INTO Parties(id, name) VALUES (?, ?)",
-			[p.id, p.name],
+		db.run("INSERT INTO parties(name) VALUES (?)",
+			[p.name],
 			
 			function(err) {
 				if(err) {
@@ -883,7 +883,7 @@ function updateParties(req, res, db) {
 	});
 	req.on("end", function() {
 		var p = JSON.parse(body);
-		db.run("UPDATE Parties SET id=?, name=?"
+		db.run("UPDATE parties SET id=?, name=?"
 			[w.id, w.properties, w.die, w.type],
 			function(err) {
 				if(err) {
@@ -902,7 +902,7 @@ function updateParties(req, res, db) {
 
 function removeParty(req, res, db) {
 	var p_id;
-	db.run("DELETE FROM Parties WHERE id = ?", [p_id], function(err) {
+	db.run("DELETE FROM parties WHERE id = ?", [p_id], function(err) {
 		if(err) {
 			console.error(err);
 			res.statusCode = 500;
@@ -920,7 +920,7 @@ function removeParty(req, res, db) {
 /*Encounters*/
 function listEncounters(req, res, db){
 	var p_id;
-	db.all("SELECT * FROM Encounters WHERE party_id = ?", [p_id], function(err, Encounters){
+	db.all("SELECT * FROM encounters WHERE party_id = ?", [p_id], function(err, encounters){
 			if(err) {
 			console.error(err);
 			res.statusCode = 500;
@@ -952,7 +952,7 @@ function addEncounter(req, res, db) {
 	req.on("end", function() {
 		
 		var e = JSON.parse(body);
-		db.run("INSERT INTO Encounters(party_id, monster_id, monster_deaths) VALUES (?, ?, ?)",
+		db.run("INSERT INTO encounters(party_id, monster_id, monster_deaths) VALUES (?, ?, ?)",
 			[e.party_id, e.monster_id, e.monster_deaths],
 			
 			function(err) {
@@ -984,7 +984,7 @@ function updateEncounters(req, res, db) {
 	});
 	req.on("end", function() {
 		var e = JSON.parse(body);
-		db.run("UPDATE Encounters SET party_id=?, monster_id=?, monster_deaths",
+		db.run("UPDATE encounters SET party_id=?, monster_id=?, monster_deaths",
 			[e.party_id, e.monster_id, e.monster_deaths],
 			function(err) {
 				if(err) {
@@ -1003,7 +1003,7 @@ function updateEncounters(req, res, db) {
 function removerEncounter(req, res, db) {
 	var p_id;
 	var m_id;
-	db.run("DELETE FROM Encounters WHERE id = ? and monster_id = ?", [p_id, m_id], function(err) {
+	db.run("DELETE FROM encounters WHERE id = ? and monster_id = ?", [p_id, m_id], function(err) {
 		if(err) {
 			console.error(err);
 			res.statusCode = 500;
@@ -1018,7 +1018,7 @@ function removerEncounter(req, res, db) {
 
 /*Monsters*/
 function listMonsters(req, res, db){
-	db.all("SELECT * FROM Monsters", [], function(err, Monsters){
+	db.all("SELECT * FROM monsters", [], function(err, monsters){
 			if(err) {
 			console.error(err);
 			res.statusCode = 500;
@@ -1044,8 +1044,8 @@ function addMonster(req, res, db) {
 	req.on("end", function() {
 		
 		var m = JSON.parse(body);
-		db.run("INSERT INTO Monsters(id, name, hit_points, exp_points) VALUES (?, ?, ?)",
-			[m.id, m.name, m.hit_points, m.exp_points],
+		db.run("INSERT INTO monsters(name, hit_points, exp_points) VALUES (?, ?, ?)",
+			[m.name, m.hit_points, m.exp_points],
 			
 			function(err) {
 				if(err) {
@@ -1076,7 +1076,7 @@ function updateMonsters(req, res, db) {
 	});
 	req.on("end", function() {
 		var m = JSON.parse(body);
-		db.run("UPDATE Monsters SET id=?, name=?, hit_point=?, exp_points=?"
+		db.run("UPDATE monsters SET id=?, name=?, hit_point=?, exp_points=?"
 			[m.id, m.name, m.hitpoint, m.exp_points],
 			function(err) {
 				if(err) {
@@ -1095,7 +1095,7 @@ function updateMonsters(req, res, db) {
 
 function removeMonster(req, res, db) {
 	var m_id;
-	db.run("DELETE FROM Monsters WHERE id = ?", [m_id], function(err) {
+	db.run("DELETE FROM monsters WHERE id = ?", [m_id], function(err) {
 		if(err) {
 			console.error(err);
 			res.statusCode = 500;
