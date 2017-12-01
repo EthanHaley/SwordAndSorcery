@@ -1,0 +1,7 @@
+C:\Users\Josh>cd H:\CIS560\sqlite
+
+C:\Users\Josh>cd /d H:\CIS560\sqlite
+
+H:\CIS560\sqlite>sqlite3 sample.db < TestData.sql
+
+H:\CIS560\sqlite>
