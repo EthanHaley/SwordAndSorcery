@@ -1,9 +1,5 @@
 #Creates a basic queries.sql files
-##TO DO: check queries, check formatting of output, add violation handling,
-#  create decent party names, produce data from PHB
-#  IDEA: move table creation to another file. It will be easier to edit.
-#  IDEA #2: change excel files to add consistency to race attributes; e.g. Orc = Size Medium
-#  IMPORTANT: This will overwrite any file named 'queries.sql'!
+#  IMPORTANT: This will overwrite any file named 'table.sql' and 'inserts.sql'!
 
 import openpyxl #!!required: pip install openyxl
 from random import randint
