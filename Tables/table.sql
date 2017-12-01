@@ -68,14 +68,14 @@ CREATE TABLE weapons
 					FOREIGN KEY(id,name,description) REFERENCES items(id,name,description)
                     );
 CREATE TABLE armor
-                    (id                 INT NOT NULL,
-                    name                VARCHAR(100) NOT NULL,
-                    description         VARCHAR(300) NOT NULL,
+                    (id                INT NOT NULL,
+                    name               VARCHAR(100) NOT NULL,
+                    description        VARCHAR(300) NOT NULL,
                     _type              VARCHAR(45) NOT NULL,
                     bonus              VARCHAR(45),
                     resistance         VARCHAR(45),
                     PRIMARY KEY(id, name, description),
-					FOREIGN KEY(id, name, description) REFERENCES items(id, name, description)
+		    FOREIGN KEY(id, name, description) REFERENCES items(id, name, description)
                     );
 CREATE TABLE inventory
                     (character_id     INT NOT NULL REFERENCES characters(id),
@@ -83,8 +83,8 @@ CREATE TABLE inventory
                     quantity          INT NOT NULL,
                     CHECK(quantity > 0),
                     PRIMARY KEY (character_id,item_id),
-					FOREIGN KEY(character_id) REFERENCES characters(id),
-					FOREIGN KEY(item_id) REFERENCES items(id)
+		    FOREIGN KEY(character_id) REFERENCES characters(id),
+		    FOREIGN KEY(item_id) REFERENCES items(id)
                     );
 CREATE TABLE monsters
                     (id                SERIAL PRIMARY KEY,
