@@ -17,7 +17,7 @@ CREATE TABLE customer_account
                     name           VARCHAR(45) NOT NULL,
                     email          VARCHAR(45) NOT NULL,
                     password       VARCHAR(45) NOT NULL,
-                    payment_rate   VARCHAR(10) NOT NULL
+                    payment_rate   NUMERIC(2) NOT NULL
                     );
 CREATE TABLE parties
                     (id                SERIAL PRIMARY KEY,
@@ -26,7 +26,7 @@ CREATE TABLE parties
 CREATE TABLE transactions
                     (id              SERIAL PRIMARY KEY,
                     customer_id      INT NOT NULL REFERENCES customer_account(id),
-                    amount           VARCHAR(45) NOT NULL,
+                    amount           NUMERIC(2) NOT NULL,
                     _date            DATE NOT NULL,
                     status           VARCHAR(45) NOT NULL
                     );
@@ -62,7 +62,7 @@ CREATE TABLE weapons
                     name                VARCHAR(100) NOT NULL,
                     description         VARCHAR(300) NOT NULL,
                     properties          VARCHAR(100) NOT NULL,
-                    damage_die          VARCHAR(10) NOT NULL,
+                    damage_die          INT NOT NULL,
                     damage_type         VARCHAR(45) NOT NULL,
 					PRIMARY KEY (id,name,description),
 					FOREIGN KEY(id,name,description) REFERENCES items(id,name,description)
