@@ -181,6 +181,8 @@ table_arr = [create_ca, create_parties, create_trans, create_chars,
 
 for i in range(len(table_arr)):
     f.write(table_arr[i]+"\r\n")
+
+f.close()
 ###end table creation
 
 
@@ -269,23 +271,23 @@ for i in range(num_spells):
 
 # # Spells_Known(character_id, spell_Id)
 ##Tweak?: allows spells to non-spell casters
-num_spells_known = 3201
-for i in range(1,num_spells_known):
+num_spells_known = 3200
+for i in range(1,num_spells_known+1):
     g.write("INSERT INTO spells_known VALUES("+
     str(i)+", "+ # character_id
-    str(randint(1, 10))+# spell_Id #Tweak allow multiple of same spell
+    str(randint(1, 10))+# spell_Id 
     ");\r\n")
     g.write("INSERT INTO spells_known VALUES("+
     str(i)+", "+ # character_id
-    str(randint(11, 21))+# spell_Id #Tweak allow multiple of same spell
+    str(randint(11, 21))+# spell_Id
     ");\r\n")
     g.write("INSERT INTO spells_known VALUES("+
     str(i)+", "+ # character_id
-    str(randint(22, 31))+# spell_Id #Tweak allow multiple of same spell
+    str(randint(22, 31))+# spell_Id
     ");\r\n")
     g.write("INSERT INTO spells_known VALUES("+
     str(i)+", "+ # character_id
-    str(randint(32, num_spells-1))+# spell_Id #Tweak allow multiple of same spell
+    str(randint(32, num_spells-1))+# spell_Id 
     ");\r\n")
 
 # # Monsters(Id, name, hit_points, exp_points)
@@ -298,7 +300,7 @@ for i in range(num_mons):
     ");\r\n")
 
 # # Encounters(party_id, monster_Id, monster_deaths)
-num_enc = randint(300, 500)
+num_enc = 800 #arbitrary
 
 monster_deaths = 10 #Tweak: arbitrary
 for i in range(num_enc):
@@ -386,4 +388,3 @@ for i in range(1, (num_chars*2)+1):
     str(randint(1, 10))+# quantity #Tweak?: arbitrary, not smart
     ");\r\n")
 g.close()
-f.close()
