@@ -115,8 +115,3 @@ CREATE TABLE encounters
                     (party_id          INT NOT NULL REFERENCES parties(id),
                     monster_id         INT NOT NULL REFERENCES monsters(id),
                     monster_deaths     INT NOT NULL
-<<<<<<< HEAD
-                    );
-=======
-                    );
->>>>>>> 469aa1b44c06d93d4cfe9159d208d9969eaaad92
