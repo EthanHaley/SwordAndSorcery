@@ -22,7 +22,7 @@ SELECT name, total_xp(id) AS total_xp
 FROM parties 
 ORDER BY total_xp DESC LIMIT 100;
 
-/*Total of completed transactions of a givin account*/
+/*Total of completed transactions of a given account*/
 SELECT sum(t.amount) 
 FROM transactions t 
 	JOIN customer_account c ON c.id = t.customer_id
