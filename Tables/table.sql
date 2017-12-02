@@ -97,6 +97,5 @@ CREATE TABLE monsters
 CREATE TABLE encounters
                     (party_id          INT NOT NULL REFERENCES parties(id),
                     monster_id         INT NOT NULL REFERENCES monsters(id),
-                    monster_deaths     INT NOT NULL,
-                    CHECK(monster_deaths > 0)
+                    monster_deaths     INT NOT NULL
                     );
