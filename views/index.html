@@ -37,8 +37,48 @@
 				<li><a href="monsters.html">Monsters</a></li>
 				<li><a href="accounts.html">Accounts</a></li>
 			  </ul>			  
-			</nav>			
+			</nav>		
 			
+			<div class="panel panel-default">
+			<div class="panel panel-body">
+				<div class="col-md-6">
+					<label for="searchChar">Search for:</label>
+					<input type="text" class="form-control" id="searchChar">
+					<button type="button" class="btn btn-primary" id="search">Search</button>
+				</div>
+					
+				<div class="col-md-6">
+				<div class="dropdown">
+					<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Find by:
+						<span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu">
+					<!-- Ensure submenus populate from DB-->
+						<li class="dropdown-submenu">
+							<a class="test" href="#">Class <span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li>Barbarian</li>
+								<li>Monk</li>
+								<li>Wizard</li>
+							</ul>
+						</li>
+						<li class="dropdown-submenu">
+							<a class="test" href="#">Race <span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li>Centaur</li>
+								<li>Halfling</li>
+								<li>Human</li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+				</div>
+				</div>
+			</div> 
+			
+			<div class="col-md-1">
+		    	<button type="button" class="btn">Create</button>
+		    </div>
 		    <table class="table table-condensed table-striped">
 				<thead>
 				  <tr>
@@ -47,6 +87,7 @@
 					<th>Class</th>
 					<th>Race</th>
 					<th>Size</th>
+					<th></th>
 				  </tr>
 				</thead>
 				<tbody>
@@ -56,6 +97,11 @@
 					<td>Barbarian</td>
 					<td>Halfling</td>
 					<td>Small</td>
+					<td><a href="editChar.html">Edit</a>
+						|<a href="inventory.html">Inventory</a>
+						|<a href="partyDetail.html">Party</a>
+						|<a data-toggle="modal" data-target="#deleteModal">Delete</a>
+					</td>
 				  </tr>
 				  <tr>
 					<td>8</td>
@@ -63,6 +109,11 @@
 					<td>Monk</td>
 					<td>Human</td>
 					<td>Medium</td>
+					<td><a href="editChar.html">Edit</a>
+						|<a href="inventory.html">Inventory</a>
+						|<a href="partyDetail.html">Party</a>
+						|<a data-toggle="modal" data-target="#deleteModal">Delete</a>
+					</td>
 				  </tr>
 				  <tr>
 					<td>12</td>
@@ -70,17 +121,17 @@
 					<td>Wizard</td>
 					<td>Centaur</td>
 					<td>Large</td>
+					<td><a href="editChar.html">Edit</a>
+						|<a href="inventory.html">Inventory</a>
+						|<a href="partyDetail.html">Party</a>
+						|<a data-toggle="modal" data-target="#deleteModal">Delete</a>
+					</td>
 				  </tr>
 				</tbody>
 			</table>
 			
 			<button type="button" class="btn">Create</button>
-			<button><a href="editChar.html" class="btn">Edit</a></button>
-			<button type="button" class="btn disabled">Inventory</button>
-			<button type="button" class="btn disabled"><a href="partyDetail.html">View Party</a></button>		
-			
-			<button type="button" class="btn btn-danger" data-toggle="modal"
-				data-target="#deleteModal">Delete</button>
+					
 		   
 		   
 			<!-- Modal -->
@@ -108,3 +159,14 @@
 		</div>
 </body>
 </html>
+
+<script>
+//Opens submenus in dropdown
+$(document).ready(function(){
+	$('.dropdown-submenu a.test').on("click", function(e){
+		$(this).next('ul').toggle();
+		e.stopPropagation();
+		e.preventDefault();
+	});
+});
+</script>

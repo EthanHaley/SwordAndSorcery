@@ -341,19 +341,19 @@ max_armor_id = num_armor+num_items+num_weapons
 j = 0
 for i in range(max_weap_id,max_armor_id):
     resistance = armor_excel['E' + str(j+2)].value
-    if(resistance =='Normal'):
-        resistance = 'Null'
-    else:
-        resistance = "'"+resistance+"'"
+    # if(resistance =='Normal'):
+    #     resistance = 'Null'
+    # else:
+    #     resistance = "'"+resistance+"'"
 
     g.write("INSERT INTO armor (id, name, description, _type, bonus, resistance) VALUES("+
     str(i) + ", '" +  # id
     armor_excel['A' + str(j+2)].value+"', '" +# name
     armor_excel['B' + str(j+2)].value+"', '" +# description
     armor_excel['C' + str(j+2)].value+"', '" +# type
-    armor_excel['D' + str(j+2)].value+"', " +# bonus
+    armor_excel['D' + str(j+2)].value+"', '" +# bonus
     resistance+ # resistance
-    ");\r\n")
+    "');\r\n")
     j+=1
 
 # # Inventory(character_id, item_Id, quantity)
