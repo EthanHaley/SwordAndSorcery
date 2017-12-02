@@ -13,7 +13,6 @@
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	</head>
 	<body>
-	
 		<div class="container-fluid">
 			<div class="page-header">
 			  <h1>That Swords'n'Sorcery Game</h1>		  
@@ -55,34 +54,15 @@
 				  </tr>
 				</thead>
 				<tbody>
+				{{#each weapons}}
 				  <tr>
-					<td>Iron Sword</td>
-					<td>D6</td>
-					<td>Slashing</td>
-					<td></td>
-					<td>Just a sword</td>
+					<td>{{name}}</td>
+					<td>d{{damage_die}}</td>
+					<td>{{damage_type}}</td>
+					<td>{{properties}}</td>
+					<td>{{description}}</td>
 				  </tr>
-				  <tr>
-					<td>Vorpal Sword</td>
-					<td>D8</td>
-					<td>Slashing</td>
-					<td>Vorpal</td>
-					<td>Snicker-snack</td>
-				  </tr>
-				  <tr>
-					<td>Javelin</td>
-					<td>D6</td>
-					<td>Piercing</td>
-					<td>Thrown</td>
-					<td>You'll stab your eye out</td>
-				  </tr>
-				  <tr>
-					<td>Fire Maul</td>
-					<td>2D6</td>
-					<td>Fire</td>
-					<td>Two-handed</td>
-					<td>KILL IT WITH FIRE</td>
-				  </tr>
+				  {{/each}}
 				</tbody>
 			</table>
 			
