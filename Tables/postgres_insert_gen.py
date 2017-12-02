@@ -57,7 +57,7 @@ create_ca = ("""CREATE TABLE """+table_names[0]+
                     name           VARCHAR(45) NOT NULL,
                     email          VARCHAR(45) NOT NULL,
                     password       VARCHAR(45) NOT NULL,
-                    payment_rate   VARCHAR(10) NOT NULL
+                    payment_rate   NUMERIC(2) NOT NULL
                     );""")
 # parties(id, name)
 create_parties = ("""CREATE TABLE """+table_names[9]+
@@ -70,7 +70,7 @@ create_trans = ("CREATE TABLE "+table_names[1]+
                 """
                     (id              SERIAL PRIMARY KEY,
                     customer_id      INT NOT NULL REFERENCES customer_account(id),
-                    amount           VARCHAR(45) NOT NULL,
+                    amount           NUMERIC(2) NOT NULL,
                     _date            DATE NOT NULL,
                     status           VARCHAR(45) NOT NULL
                     );""")
@@ -117,7 +117,7 @@ create_weaps = ("""CREATE TABLE """+table_names[7]+
                     name                VARCHAR(100) NOT NULL,
                     description         VARCHAR(300) NOT NULL,
                     properties          VARCHAR(100) NOT NULL,
-                    damage_die          VARCHAR(10) NOT NULL,
+                    damage_die          INT NOT NULL,
                     damage_type         VARCHAR(45) NOT NULL,
 					PRIMARY KEY (id,name,description),
 					FOREIGN KEY(id,name,description) REFERENCES items(id,name,description)
@@ -331,8 +331,8 @@ for i in range(num_items+1,max_weap_id):
     str(i)+", '"+# id
     weapons_excel['A'+str(j+2)].value+"', '" +# name
     weapons_excel['B'+str(j+2)].value+"', '" +# description
-    weapons_excel['C'+str(j+2)].value+"', '" +# properties
-    weapons_excel['D'+str(j+2)].value+"', '" +# damage die
+    weapons_excel['C'+str(j+2)].value+"', " +# properties
+    str(hit_die[randint(0,len(hit_die)-1)])+", '" +#weapons_excel['D'+str(j+2)].value+"', '" +# damage die
     weapons_excel['E'+str(j+2)].value+ # damage type
     "');\r\n")
     j+=1
