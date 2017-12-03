@@ -53,25 +53,19 @@
 		    <table class="table table-condensed table-striped">
 				<thead>
 				  <tr>
-					<th>ID</th>
 					<th>Name</th>
 					<th>Kills</th>
 					<th>Exp</th>
 				  </tr>
 				</thead>
 				<tbody>
+				{{#each parties}}
 				  <tr>
-					<td>1</td>
-					<td>The Only Party</td>
-					<td>20</td>
-					<td>200</td>
+					<td>{{name}}</td>
+					<td>{{kills}}</td>
+					<td>{{experience}}</td>
 				  </tr>
-				  <tr>
-					<td>2</td>
-					<td>A Challenger Approaches!</td>
-					<td>15</td>
-					<td>150</td>
-				  </tr>
+				{{/each}}
 				</tbody>
 			</table>
 			

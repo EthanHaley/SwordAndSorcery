@@ -17,7 +17,7 @@
 		<div class="container-fluid">
 			<div class="page-header">
 			  <h1>That Swords'n'Sorcery Game</h1>		  
-			  <h1><small>The Only Party</small></h1>
+			  <h1><small>{{party.name}}</small></h1>
 			</div>
 			
 			<nav class="navbar navbar-inverse">
@@ -38,7 +38,6 @@
 				<li><a href="accounts.html">Accounts</a></li>
 			  </ul>			  
 			</nav>				
-			
 		    <table class="table table-condensed table-striped">
 				<thead>
 				  <tr>
@@ -47,14 +46,13 @@
 				  </tr>
 				</thead>
 				<tbody>
+				{{#each member}}
 				  <tr>
-					<td>12</td>
-					<td>Charlie</td>
+					<td>{{_level}}</td>
+					<td>{{name}}</td>
+					<td>{{_class}}</td>
 				  </tr>
-				  <tr>
-					<td>8</td>
-					<td>Bob</td>
-				  </tr>
+				{{/each}}
 				</tbody>
 			</table>
 			

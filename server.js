@@ -57,11 +57,27 @@ app.get('/app.css', function(req, res) {
 });
 
 app.get('/accounts.html', function(req, res) {
-	res.render('accounts');
+	con.query('SELECT * FROM customer_account', function(err, result) {
+		if(err) {
+			console.log(err);
+		} else {
+			var context = {};
+			context.accounts = result;
+			res.render('accounts', context);
+		}
+	});
 });
 
 app.get('/armor.html', function(req, res) {
-	res.render('armor');
+	con.query('SELECT * FROM armor', function(err, result) {
+		if(err) {
+			console.log(err);
+		} else {
+			var context = {};
+			context.armor = result;
+			res.render('armor', context);
+		}
+	});
 });
 
 app.get('/editAccount.html', function(req, res) {
@@ -89,7 +105,15 @@ app.get('/editWeapon.html', function(req, res) {
 });
 
 app.get('/index.html', function(req, res) {
-	res.render('index');
+	con.query('SELECT * FROM characters', function(err, result) {
+		if(err) {
+			console.log(err);
+		} else {
+			var context = {};
+			context.characters = result;
+			res.render('index', context);
+		}
+	});
 });
 
 app.get('/inventory.html', function(req, res) {
@@ -97,40 +121,71 @@ app.get('/inventory.html', function(req, res) {
 });
 
 app.get('/monsters.html', function(req, res) {
-	res.render('monsters');
+	con.query('SELECT * FROM monsters', function(err, result) {
+		if(err) {
+			console.log(err);
+		} else {
+			var context = {};
+			context.monsters = result;
+			res.render('monsters', context);
+		}
+	});
 });
 
 app.get('/parties.html', function(req, res) {
-	res.render('parties');
+	con.query('SELECT * FROM parties', function(err, result) {
+		if(err) {
+			console.log(err);
+		} else {
+			//code to calcultate xp and kills for each party needs to go here
+			var context = {};
+			context.parties = result;
+			res.render('parties', context);
+		}
+	});
 });
 
 app.get('/partyDetail.html', function(req, res) {
+	//query for finding all characters that belong to a certain party
+	//query for certain party
 	res.render('partyDetail');
 });
 
 app.get('/spells.html', function(req, res) {
-	res.render('spells');
+	con.query('SELECT * FROM spells', function(err, result) {
+		if(err) {
+			console.log(err);
+		} else {
+			var context = {};
+			context.spells = result;
+			res.render('spells', context);
+		}
+	});
 });
 
 app.get('/transactions.html', function(req, res) {
-	res.render('transactions');
+	con.query('SELECT * FROM transactions', function(err, result) {
+		if(err) {
+			console.log(err);
+		} else {
+			//query to find email from the customer id of each transaction
+			var context = {};
+			context.transactions = result;
+			res.render('transactions', context);
+		}
+	});
 });
 
 app.get('/weapons.html', function(req, res) {
-	//con.connect(function(err) {
-	//	if(err) {
-	//		console.log(err);
-	//	}
-		con.query('SELECT * FROM weapons', function(err, result) {
-			if(err) {
-				console.log(err);
-			} else {
-				var context = {};
-				context.weapons = result;
-				res.render('weapons', context);
-			}
-		});
-	//});
+	con.query('SELECT * FROM weapons', function(err, result) {
+		if(err) {
+			console.log(err);
+		} else {
+			var context = {};
+			context.weapons = result;
+			res.render('weapons', context);
+		}
+	});
 });
 
 //Server start

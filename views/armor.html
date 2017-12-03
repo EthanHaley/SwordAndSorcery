@@ -57,45 +57,30 @@
 					<th>Bonus</th>
 					<th>Resistance</th>
 					<th>Description</th>
+					<th></th>
 				  </tr>
 				</thead>
 				<tbody>
+				{{#each armor}}
 				  <tr>
-					<td>Leather</td>
-					<td>Medium</td>
-					<td>+3</td>
-					<td></td>
-					<td>The trusty standby</td>
+					<td>{{name}}</td>
+					<td>{{_type}}</td>
+					<td>{{bonus}}</td>
+					<td>{{resistance}}</td>
+					<td>{{description}}</td>
+					<td>
+						<a href="editArmor.html" class="btn">Edit</a>
+						<button type="button" class="btn btn-danger" data-toggle="modal"
+						data-target="#deleteModal">Delete</button>
+					</td>
 				  </tr>
-				  <tr>
-					<td>Armor of Invisibility</td>
-					<td>Light</td>
-					<td>+2</td>
-					<td>Radiant</td>
-					<td>You are invisible. Your armor is not.</td>
-				  </tr>
-				  <tr>
-					<td>Boots of the Sneakiest Sneak</td>
-					<td>Foot</td>
-					<td>+1</td>
-					<td>Being spotted</td>
-					<td>I am the sneakiest sneak</td>
-				  </tr>
-				  <tr>
-					<td>Fire Plate</td>
-					<td>Heavy</td>
-					<td>+5</td>
-					<td>Fire</td>
-					<td>This plate armor keeps you cool as a cucumber</td>
-				  </tr>
+				{{/each}}
 				</tbody>
 			</table>
 			
-			<button type="button" class="btn">Create</button>
-			<a href="editChar.html" class="btn">Edit</a>	
+			<button type="button" class="btn">Create New Armor</button>
+				
 			
-			<button type="button" class="btn btn-danger" data-toggle="modal"
-				data-target="#deleteModal">Delete</button>
 		   
 		   
 			<!-- Modal -->

@@ -51,26 +51,18 @@
 				  </tr>
 				</thead>
 				<tbody>
+				{{#each accounts}}
 				  <tr>
-					<td>jj</td>
-					<td>jj@test.com</td>
-					<td>Standard</td>
+					<td>{{name}}</td>
+					<td>{{email}}</td>
+					<td>{{payment_rate}}</td>
 					<td><a href="editAccount.html">Edit</a>
 						|<a href="transactions.html">Transactions</a>
 						|<a href="index.html">Characters</a>
 						|<a data-toggle="modal" data-target="#deleteModal">Delete</a>
 					</td>
 				  </tr>
-				  <tr>
-					<td>THEMIGHTIEST</td>
-					<td>mightynerd@test.com</td>
-					<td>Premium</td>
-					<td><a href="editAccount.html">Edit</a>
-						|<a href="transactions.html">Transactions</a>
-						|<a href="index.html">Characters</a>
-						|<a data-toggle="modal" data-target="#deleteModal">Delete</a>
-					</td>
-				  </tr>
+				{{/each}}
 				</tbody>
 			</table>
 			

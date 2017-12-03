@@ -52,26 +52,13 @@
 				  </tr>
 				</thead>
 				<tbody>
+				{{#each spells}}
 				  <tr>
-					<td>8</td>
-					<td>Death's Proud Bear</td>
-					<td>Summons a zombie bear to fight with you</td>
+					<td>{{spell_level}}</td>
+					<td>{{name}}</td>
+					<td>{{description}}</td>
 				  </tr>
-				  <tr>
-					<td>2</td>
-					<td>Plant of Peace</td>
-					<td>Everyone chill out, man...</td>
-				  </tr>
-				  <tr>
-					<td>1</td>
-					<td>Clinging Blade</td>
-					<td>The next weapon to strike the target is stuck. Ongoing 1/2 weapon damage.</td>
-				  </tr>
-				  <tr>
-					<td>5</td>
-					<td>Song of the Door</td>
-					<td>This catchy tune creates a door in any surface <= 1' thick</td>
-				  </tr>
+				{{/each}}
 				</tbody>
 			</table>
 			

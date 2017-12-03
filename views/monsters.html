@@ -44,35 +44,19 @@
 				  <tr>
 					<th>ID</th>
 					<th>Name</th>
+					<th>Hit Points</th>
 					<th>Experience Points</th>
 				  </tr>
 				</thead>
 				<tbody>
+				{{#each monsters}}
 				  <tr>
-					<td>1</td>
-					<td>Green Goblin</td>
-					<td>5</td>
+					<td>{{id}}</td>
+					<td>{{name}}</td>
+					<td>{{hit_points}}</td>
+					<td>{{exp_points}}</td>
 				  </tr>
-				  <tr>
-					<td>2</td>
-					<td>Red Goblin</td>
-					<td>10</td>
-				  </tr>
-				  <tr>
-					<td>3</td>
-					<td>Blue Goblin</td>
-					<td>15</td>
-				  </tr>
-				  <tr>
-					<td>4</td>
-					<td>Green Dragon</td>
-					<td>100</td>
-				  </tr>
-				  <tr>
-					<td>5</td>
-					<td>Red Dragon</td>
-					<td>150</td>
-				  </tr>
+				{{/each}}
 				</tbody>
 			</table>
 			

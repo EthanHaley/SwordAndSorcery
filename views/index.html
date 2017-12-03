@@ -91,42 +91,20 @@
 				  </tr>
 				</thead>
 				<tbody>
+				{{#each characters}}
 				  <tr>
-					<td>4</td>
-					<td>Alice</td>
-					<td>Barbarian</td>
-					<td>Halfling</td>
-					<td>Small</td>
+					<td>{{_level}}</td>
+					<td>{{name}}</td>
+					<td>{{_class}}</td>
+					<td>{{race}}</td>
+					<td>{{_size}}</td>
 					<td><a href="editChar.html">Edit</a>
 						|<a href="inventory.html">Inventory</a>
 						|<a href="partyDetail.html">Party</a>
 						|<a data-toggle="modal" data-target="#deleteModal">Delete</a>
 					</td>
 				  </tr>
-				  <tr>
-					<td>8</td>
-					<td>Bob</td>
-					<td>Monk</td>
-					<td>Human</td>
-					<td>Medium</td>
-					<td><a href="editChar.html">Edit</a>
-						|<a href="inventory.html">Inventory</a>
-						|<a href="partyDetail.html">Party</a>
-						|<a data-toggle="modal" data-target="#deleteModal">Delete</a>
-					</td>
-				  </tr>
-				  <tr>
-					<td>12</td>
-					<td>Charlie</td>
-					<td>Wizard</td>
-					<td>Centaur</td>
-					<td>Large</td>
-					<td><a href="editChar.html">Edit</a>
-						|<a href="inventory.html">Inventory</a>
-						|<a href="partyDetail.html">Party</a>
-						|<a data-toggle="modal" data-target="#deleteModal">Delete</a>
-					</td>
-				  </tr>
+				{{/each}}
 				</tbody>
 			</table>
 			

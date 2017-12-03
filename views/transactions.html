@@ -50,13 +50,14 @@
 				  </tr>
 				</thead>
 				<tbody>
+				{{#each transactions}}
 				  <tr>
-					<td>mightynerd@test.com</td>
-					<td>10/1/17</td>
-					<td>$10</td>
-					<td>Completed</td>
+					<td{{email}}</td>
+					<td>{{_date}}</td>
+					<td>{{amount}}</td>
+					<td>{{status}}</td>
 				  </tr>
-				  
+				{{/each}}
 				</tbody>
 			</table>
 			
