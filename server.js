@@ -81,26 +81,32 @@ app.get('/armor.html', function(req, res) {
 });
 
 app.get('/editAccount.html', function(req, res) {
+	//pull specific account to edit and pass as context, blank if create
 	res.render('editAccount');
 });
 
 app.get('/editArmor.html', function(req, res) {
+	//pull specific armor to edit and pass as context, blank if create
 	res.render('editArmor');
 });
 
 app.get('/editChar.html', function(req, res) {
+	//pull specific character to edit and pass as context, blank if create
 	res.render('editChar');
 });
 
 app.get('/editMonster.html', function(req, res) {
+	//pull specific monster to edit and pass as context, blank if create
 	res.render('editMonster');
 });
 
 app.get('/editSpell.html', function(req, res) {
+	//pull specific spell to edit and pass as context, blank if create
 	res.render('editSpell');
 });
 
 app.get('/editWeapon.html', function(req, res) {
+	//pull specific weapon to edit and pass as context, blank if create
 	res.render('editWeapon');
 });
 
@@ -117,6 +123,7 @@ app.get('/index.html', function(req, res) {
 });
 
 app.get('/inventory.html', function(req, res) {
+	//lots to figure out here
 	res.render('inventory');
 });
 
