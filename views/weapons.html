@@ -51,6 +51,7 @@
 					<th>Damage Type</th>
 					<th>Property</th>
 					<th>Description</th>
+					<th></th>
 				  </tr>
 				</thead>
 				<tbody>
@@ -61,13 +62,14 @@
 					<td>{{damage_type}}</td>
 					<td>{{properties}}</td>
 					<td>{{description}}</td>
+					<td><a href="editChar.html" class="btn" onclick="editWeapon({{id}})">Edit</a>
 				  </tr>
 				  {{/each}}
 				</tbody>
 			</table>
 			
 			<button type="button" class="btn">Create</button>
-			<a href="editChar.html" class="btn">Edit</a>	
+				
 			
 			<button type="button" class="btn btn-danger" data-toggle="modal"
 				data-target="#deleteModal">Delete</button>

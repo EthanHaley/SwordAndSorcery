@@ -105,9 +105,13 @@ app.get('/editSpell.html', function(req, res) {
 	res.render('editSpell');
 });
 
-app.get('/editWeapon.html', function(req, res) {
+app.post('/editWeapon.html', function(req, res) {
 	//pull specific weapon to edit and pass as context, blank if create
-	res.render('editWeapon');
+	var request = req.body;
+	weaponID = request.weaponID;
+	//sql select
+
+	res.render('editWeapon', context);
 });
 
 app.get('/index.html', function(req, res) {
