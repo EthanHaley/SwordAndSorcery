@@ -82,12 +82,20 @@ app.get('/armor.html', function(req, res) {
 
 app.get('/editAccount.html', function(req, res) {
 	//pull specific account to edit and pass as context, blank if create
-	res.render('editAccount');
+		
+	//Retrives account based on id given
+	//'SELECT * FROM customer_account WHERE id = x'
+	
+	//Updates account with dummy variables 
+	//'UPDATE customer_account SET id = x username = u, name = n, email = e, password = p, payment_rate = pr WHERE id = x'
 });
 
 app.get('/editArmor.html', function(req, res) {
 	//pull specific armor to edit and pass as context, blank if create
-	res.render('editArmor');
+	
+	//Retrives armor info based on id given
+	//'SELECT * FROM armor WHERE id = x'
+	//UPDATE armor SET id = x, name = n, description = d, _type = t, bonus = b, resistance = r 
 });
 
 app.get('/editChar.html', function(req, res) {
