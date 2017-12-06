@@ -39,46 +39,53 @@
 			  </ul>			  
 			</nav>		
 			
-			<div class="panel panel-default">
-			<div class="panel panel-body">
-				<div class="col-md-6">
-					<label for="searchChar">Search for:</label>
-					<input type="text" class="form-control" id="searchChar">
-					<button type="button" class="btn btn-primary" id="search">Search</button>
-				</div>
-					
-				<div class="col-md-6">
+			
+			<div class="col-sm-5">
+				<label for="searchChar">Search for:</label>
+				<input type="text" class="form-control" id="searchChar">
+				<button type="button" class="btn btn-primary" id="search">Search</button>
+			</div>
+			
+			<div class="col-sm-5">
 				<div class="dropdown">
 					<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Find by:
 						<span class="caret"></span>
 					</button>
 					<ul class="dropdown-menu">
-					<!-- Ensure submenus populate from DB-->
 						<li class="dropdown-submenu">
-							<a class="test" href="#">Class <span class="caret"></span></a>
+							<a href="#">Class <span class="caret"></span></a>
 							<ul class="dropdown-menu">
-								<li>Barbarian</li>
+								<li>Babarian</li>
+								<li>Bard</li>
+								<li>Cleric</li>
+								<li>Druid</li>
+								<li>Fighter</li>
 								<li>Monk</li>
+								<li>Paladin</li>
+								<li>Ranger</li>
+								<li>Rogue</li>
+								<li>Sorcerer</li>
 								<li>Wizard</li>
 							</ul>
 						</li>
 						<li class="dropdown-submenu">
-							<a class="test" href="#">Race <span class="caret"></span></a>
+							<a href="#">Race <span class="caret"></span></a>
 							<ul class="dropdown-menu">
-								<li>Centaur</li>
+								<li>Dragonborn</li>
+								<li>Dwarf</li>
+								<li>Elf</li>
+								<li>Half-Elf</li>
+								<li>Half-Orc</li>
 								<li>Halfling</li>
 								<li>Human</li>
+								<li>Orc</li>								
+								<li>Tiefling</li>
 							</ul>
 						</li>
 					</ul>
 				</div>
-				</div>
-				</div>
 			</div> 
 			
-			<div class="col-md-1">
-		    	<button type="button" class="btn">Create</button>
-		    </div>
 		    <table class="table table-condensed table-striped">
 				<thead>
 				  <tr>
@@ -99,7 +106,6 @@
 					<td>{{race}}</td>
 					<td>{{_size}}</td>
 					<td><a href="editChar.html">Edit</a>
-						|<a href="inventory.html">Inventory</a>
 						|<a href="partyDetail.html">Party</a>
 						|<a data-toggle="modal" data-target="#deleteModal">Delete</a>
 					</td>
