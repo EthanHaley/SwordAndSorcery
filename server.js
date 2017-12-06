@@ -82,7 +82,10 @@ app.get('/armor.html', function(req, res) {
 
 app.get('/editAccount.html', function(req, res) {
 	//pull specific account to edit and pass as context, blank if create
-		
+	
+	//Inserts new customer into database, id auto increments so don't insert that.
+    //'INSERT INTO customer_account(username,name,email,password,payment_rate) VALUES(u,n,e,p,pr)'
+	
 	//Retrives account based on id given
 	//'SELECT * FROM customer_account WHERE id = x'
 	
@@ -93,11 +96,14 @@ app.get('/editAccount.html', function(req, res) {
 app.get('/editArmor.html', function(req, res) {
 	//pull specific armor to edit and pass as context, blank if create
 	
+	//insert armor into database, id is foreign key
+	//'INSERT INTO armor(id,name,description,_type,bonus,resistance) VALUES(i,n,d,t,b,r)'
+	
 	//Retrives armor info based on id(x) given
 	//'SELECT * FROM armor ar WHERE id = x'
 	
 	//Updates armor for the given id by seting feilds
-	//UPDATE armor ar SET ar.id = x, ar.name = n, ar.description = d, ar._type = t, ar.bonus = b, ar.resistance = r WHERE ar.id = x' 
+	//'UPDATE armor ar SET ar.id = x, ar.name = n, ar.description = d, ar._type = t, ar.bonus = b, ar.resistance = r WHERE ar.id = x' 
 });
 
 app.get('/editChar.html', function(req, res) {
@@ -138,6 +144,10 @@ app.get('/index.html', function(req, res) {
 
 app.get('/inventory.html', function(req, res) {
 	//lots to figure out here
+	
+	//'SELECT * FROM inventory in WHERE in.character_id = x'
+	//'INSERT INTO inventory(character_id,item_id,quantity) VALUES(ci,i,q)'
+	//'UPDATE inventory in SET in.item_id = i, quantity = q WHERE in.character_id = x'
 	res.render('inventory');
 });
 
@@ -169,6 +179,17 @@ app.get('/parties.html', function(req, res) {
 app.get('/partyDetail.html', function(req, res) {
 	//query for finding all characters that belong to a certain party
 	//query for certain party
+	
+	//This returns character information for each party memeber based on given party id.
+	//  'SELECT * FROM characters ch '
+	//+ 'JOIN parties pa ON ch.party_id = pa.id '
+	//+ 'WHERE pa.id = x '
+	
+	
+	//This query returns all charaters for each party in the game and orders them by party id.
+	//  'SELECT * FROM characters ch '
+	//+ 'JOIN parties pa ON ch.party_id = pa.id '
+	//+ 'ORDER BY pa.id'
 	res.render('partyDetail');
 });
 
