@@ -81,37 +81,95 @@ app.get('/armor.html', function(req, res) {
 });
 
 app.get('/editAccount.html', function(req, res) {
-	//pull specific account to edit and pass as context, blank if create
 	res.render('editAccount');
 });
 
 app.get('/editArmor.html', function(req, res) {
-	//pull specific armor to edit and pass as context, blank if create
 	res.render('editArmor');
 });
 
 app.get('/editChar.html', function(req, res) {
-	//pull specific character to edit and pass as context, blank if create
 	res.render('editChar');
 });
 
 app.get('/editMonster.html', function(req, res) {
-	//pull specific monster to edit and pass as context, blank if create
 	res.render('editMonster');
 });
 
 app.get('/editSpell.html', function(req, res) {
-	//pull specific spell to edit and pass as context, blank if create
 	res.render('editSpell');
 });
 
-app.post('/editWeapon.html', function(req, res) {
-	//pull specific weapon to edit and pass as context, blank if create
+app.post('/editAccount.html', function(req, res) {
 	var request = req.body;
-	weaponID = request.weaponID;
-	//sql select
+	if(request.isEdit) {
+		accountID = request.accountID;
+		//sql stuff
+	}
+	else {
+		//sql stuff
+	}
+	res.redirect('/accounts');
+});
 
-	res.render('editWeapon', context);
+app.post('/editArmor.html', function(req, res) {
+	var request = req.body;
+	if(request.isEdit) {
+		armorID = request.armorID;
+		//sql stuff
+	}
+	else {
+		//sql stuff
+	}
+	res.redirect('/armor.html');
+});
+
+app.post('/editChar.html', function(req, res) {
+	var request = req.body;
+	if(request.isEdit) {
+		characterID = request.characterID;
+		//sql stuff
+	}
+	else {
+		//sql stuff
+	}
+	res.redirect('/index.html');
+});
+
+app.post('/editMonster.html', function(req, res) {
+	var request = req.body;
+	if(request.isEdit) {
+		monsterID = request.monsterID;
+		//sql stuff
+	}
+	else {
+		//sql stuff
+	}
+	res.redirect('/monsters.html');
+});
+
+app.post('/editSpell.html', function(req, res) {
+	var request = req.body;
+	if(request.isEdit) {
+		spellID = request.spellID;
+		//sql stuff
+	}
+	else {
+		//sql stuff
+	}
+	res.redirect('/spells.html');
+});
+
+app.post('/editWeapon.html', function(req, res) {
+	var request = req.body;
+	if(request.isEdit) {
+		weaponID = request.weaponID;
+		//sql stuff
+	}
+	else {
+		//sql stuff
+	}
+	res.redirect('/weapons.html');
 });
 
 app.get('/index.html', function(req, res) {
