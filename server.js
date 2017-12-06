@@ -102,6 +102,20 @@ app.get('/editMonster.html', function(req, res) {
 
 app.get('/editSpell.html', function(req, res) {
 	//pull specific spell to edit and pass as context, blank if create
+	var request = req.body;
+	spellID = request.spellID;
+	//sql select
+	var sql = 'SELECT * FROM spells WHERE id = ?';
+	
+	con.query(sql, spellID, function(err, result)
+		{
+			if(err)
+			{
+				console.log(err);
+			}else{
+				//do something with result
+			}
+		});
 	res.render('editSpell');
 });
 
@@ -110,6 +124,16 @@ app.post('/editWeapon.html', function(req, res) {
 	var request = req.body;
 	weaponID = request.weaponID;
 	//sql select
+	var sql = 'SELECT * FROM weapons WHERE id = ?';
+	
+	con.query(sql, weaponID, function(err, result)
+	{
+		if(err){
+			console.log(err);
+		} else{
+			//do something with result
+		}
+	});
 
 	res.render('editWeapon', context);
 });
