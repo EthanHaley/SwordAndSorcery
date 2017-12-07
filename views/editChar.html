@@ -40,7 +40,7 @@
 			</nav>		
 			
 			<form class="form-horizontal">
-				<div class="col-sm-8">
+				<div class="col-sm-6">
 					<div class="form-group">
 						<label for="level">Level:</label>
 						<input type="number" class="form-control" id="level" value="{{_level}}">
@@ -49,18 +49,54 @@
 						<input type="text" class="form-control" id="name" value="{{name}}">
 					  
 						<label for="class">Class:</label>
-						<input type="text" class="form-control" id="class" value="{{_class}}">
+						<div class="dropdown" id="class">
+							<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Select Class
+						  	<span class="caret"></span></button>
+						  	<ul class="dropdown-menu">
+								<li>Babarian</li>
+								<li>Bard</li>
+								<li>Cleric</li>
+								<li>Druid</li>
+								<li>Fighter</li>
+								<li>Monk</li>
+								<li>Paladin</li>
+								<li>Ranger</li>
+								<li>Rogue</li>
+								<li>Sorcerer</li>
+								<li>Wizard</li>
+						 	</ul>
+						</div>
 					 
 						<label for="race">Race:</label>
-						<input type="text" class="form-control" id="race" value="{{race}}">
+						<div class="dropdown" id="race">
+							<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Select Race
+						  	<span class="caret"></span></button>
+						  	<ul class="dropdown-menu">
+								<li>Dragonborn</li>
+								<li>Dwarf</li>
+								<li>Elf</li>
+								<li>Half-Elf</li>
+								<li>Half-Orc</li>
+								<li>Halfling</li>
+								<li>Human</li>
+								<li>Orc</li>								
+								<li>Tiefling</li>								
+						 	</ul>
+						</div>
 						
 						<label for="size">Size:</label>
-						<input type="text" class="form-control" id="size" value="{{_size}}">	
+						<div class="dropdown" id="size">
+							<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Select Size
+						  	<span class="caret"></span></button>
+						  	<ul class="dropdown-menu">
+								<li>Small</li>
+								<li>Medium</li>
+						 	</ul>
+						</div>
 					</div>
 				  
-					<button type="button" class="btn">Edit Inventory</button>
 					<button type="button" class="btn">Edit Spells</button>
-					<button type="button" class="btn">View Party?</button>	
+					<button type="button" class="btn">View Party</button>	
 					<button type="submit" class="btn btn-success">Submit</button>
 				</div>
 			</form>

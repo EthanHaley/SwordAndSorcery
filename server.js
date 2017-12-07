@@ -89,7 +89,30 @@ app.get('/editArmor.html', function(req, res) {
 });
 
 app.get('/editChar.html', function(req, res) {
+	//pull specific character to edit and pass as context, blank if create
+	
+	/*
+		'SELECT * FROM characters where id = x'
+		
+		'UPDATE characters SET id = x, name = n, level = l, race = r, class = c, size = s'
+		
+		'INSERT characters SET id = x, name = n, level = l, race = r, class = c, size = s'
+	*/
 	res.render('editChar');
+});
+
+app.post('/editMonster.html', function(req, res) {
+	//pull specific monster to edit and pass as context, blank if create
+
+	/*
+		'SELECT * FROM monsters where id = x'
+		
+		'UPDATE monsters SET id = x, name = n, experience = exp'
+		
+		'INSERT monsters SET id = x, name = n, experience = exp'
+	*/
+	
+	res.render('editMonster', context);
 });
 
 app.get('/editMonster.html', function(req, res) {

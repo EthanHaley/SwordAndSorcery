@@ -18,34 +18,34 @@ GROUP BY p.id
 ORDER BY kills DESC LIMIT 100;
 
 /*Leaderboard of top 100 parties by xp*/
-SELECT name, total_xp(id) AS total_xp
+SELECT name, GetPartyExp(id) AS GetPartyExp
 FROM parties 
-ORDER BY total_xp DESC LIMIT 100;
+ORDER BY GetPartyExp DESC LIMIT 100;
 
 /*Total of completed transactions of a given account*/
 SELECT sum(t.amount) 
 FROM transactions t 
 	JOIN customer_account c ON c.id = t.customer_id
-WHERE c.username = '' AND t.status = 'Complete';
+WHERE c.username = ? AND t.status = 'Complete';
 
 /*lists characters of a givin class of a givin account*/
 SELECT ch._class, ch.name, ch.race, ch._size, ch._level
 FROM customer_account ca
 	JOIN characters ch ON ch.customer_id = ca.id
-WHERE ch._class = '' AND ca.username = '';
+WHERE ch._class = ? AND ca.username = ?;
 
 /*lists the spells known by a givin character and account*/
 SELECT sp.name 
 FROM spells_known sk
 	JOIN spells sp ON sp.id = sk.spell_id
 	JOIN characters ch ON ch.id = sk.character_id
-WHERE ch.id = '' AND ch.customer_id = '';
+WHERE ch.id = ? AND ch.customer_id = ?;
 
 /*lists armor that has a given resistance*/
-SELECT * FROM armor WHERE resistance = x;
+SELECT * FROM armor WHERE resistance = ?;
 
 /*Function to calculate the total xp of a givin party*/
-CREATE OR REPLACE FUNCTION total_xp(p_id int)
+CREATE OR REPLACE FUNCTION GetPartyExp(p_id int)
 RETURNS int AS 
 $BODY$	
 	DECLARE
