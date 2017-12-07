@@ -186,13 +186,27 @@ app.post('/editSpell.html', function(req, res) {
 app.post('/editWeapon.html', function(req, res) {
 	var request = req.body;
 	if(request.isEdit) {
-		weaponID = request.weaponID;
-		//sql stuff
+		var sql = "SELECT * FROM weapons WHERE id = ?"
+		con.query(sql, [request.weaponID], function(err, result) {
+			if(err) {
+				console.log(err);
+			}
+			else {
+				res.render('editWeapon', result[0]);
+			}
+		});
 	}
 	else {
-		//sql stuff
+		var sql = "UPDATE weapons SET name=?, description=?, properties=?, damage_die=?, damage_type=? WHERE id=?";
+		con.query(sql, [request.name, request.description, request.property, request.damage, request.type, request.id], function(err, result) {
+			if(err) {
+				console.log(err);
+			}
+			else {
+				console.log(result);
+			}
+		});
 	}
-	res.redirect('/weapons.html');
 });
 
 app.get('/index.html', function(req, res) {

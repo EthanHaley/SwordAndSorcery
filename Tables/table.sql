@@ -1,15 +1,15 @@
 DROP TABLE IF EXISTS customer_account;
 DROP TABLE IF EXISTS transactions;
-DROP TABLE IF EXISTS characters;
 DROP TABLE IF EXISTS spells_known;
 DROP TABLE IF EXISTS spells;
 DROP TABLE IF EXISTS inventory;
-DROP TABLE IF EXISTS items;
 DROP TABLE IF EXISTS weapons;
 DROP TABLE IF EXISTS armor;
 DROP TABLE IF EXISTS parties;
 DROP TABLE IF EXISTS encounters;
 DROP TABLE IF EXISTS monsters;
+DROP TABLE IF EXISTS items;
+DROP TABLE IF EXISTS characters;
 
 CREATE TABLE customer_account
                     (id            int NOT NULL AUTO_INCREMENT,
@@ -115,3 +115,4 @@ CREATE TABLE encounters
                     (party_id          INT NOT NULL REFERENCES parties(id),
                     monster_id         INT NOT NULL REFERENCES monsters(id),
                     monster_deaths     INT NOT NULL
+                    );

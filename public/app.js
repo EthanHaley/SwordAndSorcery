@@ -1,5 +1,33 @@
 function loadPage() {
-	$('body').load('/view.html');
+	$('body').load('/index.html');
+}
+
+function loadAccounts() {
+	$('body').load('/accounts.html');
+}
+
+function loadArmor() {
+	$('body').load('/armor.html');
+}
+
+function loadCharacters() {
+	$('body').load('/index.html');
+}
+
+function loadMonsters() {
+	$('body').load('/monsters.html');
+}
+
+function loadParties() {
+	$('body').load('/parties.html');
+}
+
+function loadSpells() {
+	$('body').load('/spells.html');
+}
+
+function loadWeapons() {
+	$('body').load('/weapons.html');
 }
 
 function editAccount(accountID) {
@@ -41,6 +69,7 @@ function editWeapon(weaponID) {
 	var context = {};
 	context.weaponID = weaponID;
 	context.isEdit = true;
+	console.log(context);
 	$('body').load('/editWeapon.html', context);
 }
 
@@ -88,8 +117,9 @@ function saveSpell() {
 	$.post('/editSpell.html', spell);
 }
 
-function saveWeapon() {
+function saveWeapon(weaponID) {
 	var weapon = {};
+	weapon.id = weaponID;
 	weapon.name = $('#name').val();
 	weapon.damage = $('#damage').val();
 	weapon.type = $('#dmgType').val();
