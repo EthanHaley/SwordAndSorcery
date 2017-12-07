@@ -151,33 +151,49 @@ app.post('/editMonster.html', function(req, res) {
 app.post('/editSpell.html', function(req, res) {
 	var request = req.body;
 	if(request.isEdit) {
-		spellID = request.spellID;
-		//sql stuff
+		var sql = 'SELECT * FROM spells WHERE id = ?';
+		con.query(sql, [request.id], function(err, result){
+			if(err){
+				console.log(err);
+			} else{
+				res.render('/spells.html',result[0]);
+			}
+		});
 	}
 	else {
-		//sql stuff
+		var sql = 'UPDATE spells SET name = ?, spell_level = ?, description = ? WHERE id = ?';
+		con.query(sql, [request.name, request.spell_level, request.description, request.id], function(err, result){
+			if(err){
+				console.log(err);
+			} else{
+				console.log(result);
+			}
+		});
 	}
-	res.redirect('/spells.html');
 });
 
 app.post('/editWeapon.html', function(req, res) {
 	var request = req.body;
 	if(request.isEdit) {
-		weaponID = request.weaponID;
-		//sql stuff
 		var sql = 'SELECT * FROM weapons WHERE id = ?';
-		con.query(sql, weaponID, function(err, result, field){
+		con.query(sql, [request.id], function(err, result){
 			if(err){
 				console.log(err);
 			} else{
-				//do something with result
+				res.render('/weapons.html', result[0]);
 			}
 		});
 	}
 	else {
-		//sql stuff
+		var sql = 'UPDATE weapons SET name = ?, description = ?, properties = ?, damage_die = ?, damage_type = ? WHERE id = ?';
+		con.query(sql, [request.name, request.description, request.properties, request.damage_die, request.damage_type, request.id], function(err, result){
+			if(err){
+				console.log(err);
+			} else{
+				console.log(result);
+			}
+		});
 	}
-	res.redirect('/weapons.html');
 });
 
 app.get('/index.html', function(req, res) {
