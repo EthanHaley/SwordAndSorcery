@@ -17,7 +17,8 @@ CREATE TABLE customer_account
                     name           VARCHAR(45) NOT NULL,
                     email          VARCHAR(45) NOT NULL,
                     password       VARCHAR(45) NOT NULL,
-                    payment_rate   NUMERIC(2) NOT NULL,
+                    payment_rate   NUMERIC(5,2) NOT NULL,
+		    CHECK(payment_rate > 0),
                     PRIMARY KEY (id)
                     );
 
@@ -30,7 +31,8 @@ CREATE TABLE parties
 CREATE TABLE transactions
                     (id              int NOT NULL AUTO_INCREMENT,
                     customer_id      INT NOT NULL REFERENCES customer_account(id),
-                    amount           NUMERIC(2) NOT NULL,
+                    amount           NUMERIC(5,2) NOT NULL,
+		    CHECK(amount > 0),
                     _date            DATE NOT NULL,
                     status           VARCHAR(45) NOT NULL,
                     PRIMARY KEY (id)
