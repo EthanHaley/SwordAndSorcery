@@ -1,69 +1,85 @@
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="utf-8"> 
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<!-- Latest compiled and minified CSS -->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
-		<!-- jQuery library -->
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-		<!-- Latest compiled JavaScript -->
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	</head>
-	<body>
+<div class="container-fluid">
+	<div class="page-header">
+	  <h1>That Swords'n'Sorcery Game</h1>		  
+	  <h1><small>Edit Character</small></h1>
+	</div>
 	
-		<div class="container-fluid">
-			<div class="page-header">
-			  <h1>That Swords'n'Sorcery Game</h1>		  
-			  <h1><small>Edit Character</small></h1>
-			</div>
-			
-			<nav class="navbar navbar-inverse">
-			  <ul class="nav navbar-nav">
-				<li class="active"><a href="index.html">Characters</a></li>
-				<li><a href="parties.html">Parties</a></li>
-				<li class="dropdown">
-					<a class="dropdown-toggle" data-toggle="dropdown" href="#">Items
-						<span class="caret"></span>
-					</a>
-					<ul class="dropdown-menu">
-						<li><a href="weapons.html">Weapons</a></li>
-						<li><a href="armor.html">Armor</a></li>
-					</ul>
-				</li>
-				<li><a href="spells.html">Spells</a></li>
-				<li><a href="monsters.html">Monsters</a></li>
-				<li><a href="accounts.html">Accounts</a></li>
-			  </ul>			  
-			</nav>		
-			
-			<form class="form-horizontal">
-				<div class="col-sm-8">
-					<div class="form-group">
-						<label for="level">Level:</label>
-						<input type="number" class="form-control" id="level" value="{{_level}}">
-						
-						<label for="name">Name:</label>
-						<input type="text" class="form-control" id="name" value="{{name}}">
-					  
-						<label for="class">Class:</label>
-						<input type="text" class="form-control" id="class" value="{{_class}}">
-					 
-						<label for="race">Race:</label>
-						<input type="text" class="form-control" id="race" value="{{race}}">
-						
-						<label for="size">Size:</label>
-						<input type="text" class="form-control" id="size" value="{{_size}}">	
-					</div>
-				  
-					<button type="button" class="btn">Edit Inventory</button>
-					<button type="button" class="btn">Edit Spells</button>
-					<button type="button" class="btn">View Party?</button>	
-					<button type="submit" class="btn btn-success">Submit</button>
+	<nav class="navbar navbar-inverse">
+	  <ul class="nav navbar-nav">
+		<li class="active"><a class="btn" onclick="loadCharacters();">Characters</a></li>
+		<li><a class="btn" onclick="loadParties();">Parties</a></li>
+		<li class="dropdown">
+			<a class="dropdown-toggle" data-toggle="dropdown" href="#">Items
+				<span class="caret"></span>
+			</a>
+			<ul class="dropdown-menu">
+				<li><a class="btn" onclick="loadArmor();">Armor</a></li>
+				<li><a class="btn" onclick="loadWeapons();">Weapons</a></li>
+			</ul>
+		</li>
+		<li><a class="btn" onclick="loadSpells();">Spells</a></li>
+		<li><a class="btn" onclick="loadMonsters();">Monsters</a></li>
+		<li><a class="btn" onclick="loadAccounts();">Accounts</a></li>
+	  </ul>			  
+	</nav>		
+	
+	<form class="form-horizontal">
+		<div class="col-sm-6">
+			<div class="form-group">
+				<label for="level">Level:</label>
+				<input type="number" class="form-control" id="level" value="{{_level}}">
+				
+				<label for="name">Name:</label>
+				<input type="text" class="form-control" id="name" value="{{name}}">
+			  
+				<label for="class">Class:</label>
+				<div class="dropdown" id="class">
+					<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Select Class
+				  	<span class="caret"></span></button>
+				  	<ul class="dropdown-menu">
+						<li>Babarian</li>
+						<li>Bard</li>
+						<li>Cleric</li>
+						<li>Druid</li>
+						<li>Fighter</li>
+						<li>Monk</li>
+						<li>Paladin</li>
+						<li>Ranger</li>
+						<li>Rogue</li>
+						<li>Sorcerer</li>
+						<li>Wizard</li>
+				 	</ul>
 				</div>
-			</form>
+			 
+				<label for="race">Race:</label>
+				<div class="dropdown" id="race">
+					<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Select Race
+				  	<span class="caret"></span></button>
+				  	<ul class="dropdown-menu">
+						<li>Dragonborn</li>
+						<li>Dwarf</li>
+						<li>Elf</li>
+						<li>Half-Elf</li>
+						<li>Half-Orc</li>
+						<li>Halfling</li>
+						<li>Human</li>
+						<li>Orc</li>								
+						<li>Tiefling</li>								
+				 	</ul>
+				</div>
+				
+				<label for="size">Size:</label>
+				<div class="dropdown" id="size">
+					<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Select Size
+				  	<span class="caret"></span></button>
+				  	<ul class="dropdown-menu">
+						<li>Small</li>
+						<li>Medium</li>
+				 	</ul>
+				</div>
+			</div>
+		  
+			<button class="btn btn-success" onclick="saveCharacter({{id}})">Submit</button>
 		</div>
-	</body>
-</html>
+	</form>
+</div>
