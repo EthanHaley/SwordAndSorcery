@@ -38,18 +38,19 @@
 		{{#each accounts}}
 		  <tr>
 			<td>{{name}}</td>
+			<td>{{username}}</td>
 			<td>{{email}}</td>
 			<td>{{payment_rate}}</td>
-			<td><a href="editAccount.html">Edit</a>
+			<td><a class="btn" onclick="editAccount({{id}})">Edit</a>
 				|<a href="index.html">Characters</a>
-				|<a data-toggle="modal" data-target="#deleteModal">Delete</a>
+				|<a class="btn" onclick="deleteAccount({{id}})">Delete</a>
 			</td>
 		  </tr>
 		{{/each}}
 		</tbody>
 	</table>
 	
-	<button type="button" class="btn">Create</button>		   
+	<button type="button" class="btn" onclick="editAccount()">Create</button>		   
    
 	<!-- Modal -->
 	<div id="deleteModal" class="modal fade" role="dialog">

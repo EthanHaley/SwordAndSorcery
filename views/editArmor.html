@@ -33,7 +33,7 @@
 				<input type="text" class="form-control" id="type" value="{{_type}}">
 			  
 				<label for="bonus">Bonus:</label>
-				<input type="number" class="form-control" id="bonus" value="{{bonus}}">
+				<input type="text" class="form-control" id="bonus" value="{{bonus}}">
 			 
 				<label for="resistance">Resistance:</label>
 				<input type="text" class="form-control" id="resistance" value="{{resistance}}">
@@ -42,7 +42,7 @@
 				<input type="text" class="form-control" id="description" value="{{description}}">	
 			</div>
 		  
-			<button type="submit" class="btn btn-success">Submit</button>
+			<button class="btn btn-success" onclick="saveArmor({{id}})">Submit</button>
 		</div>
 	</form>
 </div>

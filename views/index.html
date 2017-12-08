@@ -26,6 +26,7 @@
 	
 	
 	<div class="col-sm-5">
+		<button type="button" class="btn" onclick="editCharacter()">Create</button>
 		<label for="searchChar">Search for:</label>
 		<input type="text" class="form-control" id="searchChar">
 		<button type="button" class="btn btn-primary" id="search">Search</button>
@@ -90,19 +91,15 @@
 			<td>{{_class}}</td>
 			<td>{{race}}</td>
 			<td>{{_size}}</td>
-			<td><a href="editChar.html">Edit</a>
+			<td><a class="btn" onclick="editCharacter({{id}})">Edit</a>
 				|<a href="partyDetail.html">Party</a>
-				|<a data-toggle="modal" data-target="#deleteModal">Delete</a>
+				|<a class="btn" onclick="deleteCharacter({{id}})">Delete</a>
 			</td>
 		  </tr>
 		{{/each}}
 		</tbody>
 	</table>
-	
-	<button type="button" class="btn">Create</button>
-			
-   
-   
+
 	<!-- Modal -->
 	<div id="deleteModal" class="modal fade" role="dialog">
 	  <div class="modal-dialog">

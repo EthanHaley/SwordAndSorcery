@@ -89,30 +89,7 @@ app.get('/editArmor.html', function(req, res) {
 });
 
 app.get('/editChar.html', function(req, res) {
-	//pull specific character to edit and pass as context, blank if create
-	
-	/*
-		'SELECT * FROM characters where id = x'
-		
-		'UPDATE characters SET id = x, name = n, level = l, race = r, class = c, size = s'
-		
-		'INSERT characters SET id = x, name = n, level = l, race = r, class = c, size = s'
-	*/
 	res.render('editChar');
-});
-
-app.post('/editMonster.html', function(req, res) {
-	//pull specific monster to edit and pass as context, blank if create
-
-	/*
-		'SELECT * FROM monsters where id = x'
-		
-		'UPDATE monsters SET id = x, name = n, experience = exp'
-		
-		'INSERT monsters SET id = x, name = n, experience = exp'
-	*/
-	
-	res.render('editMonster', context);
 });
 
 app.get('/editMonster.html', function(req, res) {
@@ -123,64 +100,212 @@ app.get('/editSpell.html', function(req, res) {
 	res.render('editSpell');
 });
 
+app.get('/editWeapon.html', function(req, res) {
+	res.render('editWeapon');
+});
+
 app.post('/editAccount.html', function(req, res) {
 	var request = req.body;
 	if(request.isEdit) {
-		accountID = request.accountID;
-		//sql stuff
+		var sql = "SELECT * FROM customer_account WHERE id = ?"
+		con.query(sql, [request.accountID], function(err, result) {
+			if(err) {
+				console.log(err);
+			}
+			else {
+				res.render('editAccount', result[0]);
+			}
+		});
 	}
 	else {
-		//sql stuff
+		if(request.id) {
+			var sql = "UPDATE customer_account SET username=?, name=?, email=?, password=?, payment_rate=? WHERE id=?";
+			con.query(sql, [request.username, request.name, request.email, request.password, 0, request.id], function(err, result) {
+				if(err) {
+					console.log(err);
+				}
+				else {
+					console.log(result);
+				}
+			});
+		}
+		else {
+			var sql = "INSERT customer_account SET username=?, name=?, email=?, password=?, payment_rate=?";
+			con.query(sql, [request.username, request.name, request.email, request.password, 0], function(err, result) {
+				if(err) {
+					console.log(err);
+				}
+				else {
+					console.log(result);
+				}
+			});
+		}
 	}
-	res.redirect('/accounts');
 });
 
 app.post('/editArmor.html', function(req, res) {
 	var request = req.body;
 	if(request.isEdit) {
-		armorID = request.armorID;
-		//sql stuff
+		var sql = "SELECT * FROM armor WHERE id = ?"
+		con.query(sql, [request.armorID], function(err, result) {
+			if(err) {
+				console.log(err);
+			}
+			else {
+				res.render('editArmor', result[0]);
+			}
+		});
 	}
 	else {
-		//sql stuff
+		if(request.id) {
+			var sql = "UPDATE armor SET name=?, description=?, _type=?, bonus=?, resistance=? WHERE id=?";
+			con.query(sql, [request.name, request.description, request.type, request.bonus, request.resistance, request.id], function(err, result) {
+				if(err) {
+					console.log(err);
+				}
+				else {
+					console.log(result);
+				}
+			});
+		}
+		else {
+			var sql = "INSERT items SET name=?, description=?";
+			con.query(sql, [request.name, request.description], function(err, result) {
+				if(err) {
+					console.log(err);
+				}
+				else {
+					console.log(result);
+					var sql = "INSERT armor SET id=?, name=?, description=?, _type=?, bonus=?, resistance=?";
+					con.query(sql, [result.insertId, request.name, request.description, request.type, request.bonus, request.resistance], function(err, result) {
+						if(err) {
+							console.log(err);
+						}
+						else {
+							console.log(result);
+						}
+					})
+				}
+			});
+		}
 	}
-	res.redirect('/armor.html');
 });
 
 app.post('/editChar.html', function(req, res) {
 	var request = req.body;
 	if(request.isEdit) {
-		characterID = request.characterID;
-		//sql stuff
+		var sql = "SELECT * FROM characters WHERE id = ?"
+		con.query(sql, [request.characterID], function(err, result) {
+			if(err) {
+				console.log(err);
+			}
+			else {
+				res.render('editChar', result[0]);
+			}
+		});
 	}
 	else {
-		//sql stuff
+		if(request.id) {
+			var sql = "UPDATE characters SET name=?, party_id=?, customer_id=?, race=?, _class=?, _level=?, _size=? WHERE id=?";
+			con.query(sql, [request.name, 1, 1641, request.race, request.class, request.level, request.size, request.id], function(err, result) {
+				if(err) {
+					console.log(err);
+				}
+				else {
+					console.log(result);
+				}
+			});
+		}
+		else {
+			var sql = "INSERT characters SET name=?, party_id=?, customer_id=?, race=?, _class=?, _level=?, _size=?";
+			con.query(sql, [request.name, 1, 1641, request.race, request.class, request.level, request.size], function(err, result) {
+				if(err) {
+					console.log(err);
+				}
+				else {
+					console.log(result);
+				}
+			});
+		}
 	}
-	res.redirect('/index.html');
 });
 
 app.post('/editMonster.html', function(req, res) {
 	var request = req.body;
 	if(request.isEdit) {
-		monsterID = request.monsterID;
-		//sql stuff
+		var sql = "SELECT * FROM monsters WHERE id = ?"
+		con.query(sql, [request.monsterID], function(err, result) {
+			if(err) {
+				console.log(err);
+			}
+			else {
+				res.render('editMonster', result[0]);
+			}
+		});
 	}
 	else {
-		//sql stuff
+		if(request.id) {
+			var sql = "UPDATE monsters SET name=?, hit_points=?, exp_points=? WHERE id=?";
+			con.query(sql, [request.name, request.hitpoints, request.experience, request.id], function(err, result) {
+				if(err) {
+					console.log(err);
+				}
+				else {
+					console.log(result);
+				}
+			});
+		}
+		else {
+			var sql = "INSERT monsters SET name=?, hit_points=?, exp_points=?";
+			con.query(sql, [request.name, request.hitpoints, request.experience], function(err, result) {
+				if(err) {
+					console.log(err);
+				}
+				else {
+					console.log(result);
+				}
+			});
+		}
 	}
-	res.redirect('/monsters.html');
 });
 
 app.post('/editSpell.html', function(req, res) {
 	var request = req.body;
 	if(request.isEdit) {
-		spellID = request.spellID;
-		//sql stuff
+		var sql = "SELECT * FROM spells WHERE id = ?"
+		con.query(sql, [request.spellID], function(err, result) {
+			if(err) {
+				console.log(err);
+			}
+			else {
+				res.render('editSpell', result[0]);
+			}
+		});
 	}
 	else {
-		//sql stuff
+		if(request.id) {
+			var sql = "UPDATE spells SET name=?, spell_level=?, description=? WHERE id=?";
+			con.query(sql, [request.name, request.level, request.description, request.id], function(err, result) {
+				if(err) {
+					console.log(err);
+				}
+				else {
+					console.log(result);
+				}
+			});
+		}
+		else {
+			var sql = "INSERT spells SET name=?, spell_level=?, description=?";
+			con.query(sql, [request.name, request.level, request.description], function(err, result) {
+				if(err) {
+					console.log(err);
+				}
+				else {
+					console.log(result);
+				}
+			});
+		}
 	}
-	res.redirect('/spells.html');
 });
 
 app.post('/editWeapon.html', function(req, res) {
@@ -197,15 +322,37 @@ app.post('/editWeapon.html', function(req, res) {
 		});
 	}
 	else {
-		var sql = "UPDATE weapons SET name=?, description=?, properties=?, damage_die=?, damage_type=? WHERE id=?";
-		con.query(sql, [request.name, request.description, request.property, request.damage, request.type, request.id], function(err, result) {
-			if(err) {
-				console.log(err);
-			}
-			else {
-				console.log(result);
-			}
-		});
+		if(request.id) {
+			var sql = "UPDATE weapons SET name=?, description=?, properties=?, damage_die=?, damage_type=? WHERE id=?";
+			con.query(sql, [request.name, request.description, request.property, request.damage, request.type, request.id], function(err, result) {
+				if(err) {
+					console.log(err);
+				}
+				else {
+					console.log(result);
+				}
+			});
+		}
+		else {
+			var sql = "INSERT items SET name=?, description=?";
+			con.query(sql, [request.name, request.description], function(err, result) {
+				if(err) {
+					console.log(err);
+				}
+				else {
+					console.log(result);
+					var sql = "INSERT weapons SET id=?, name=?, description=?, properties=?, damage_die=?, damage_type=?";
+					con.query(sql, [result.insertId, request.name, request.description, request.property, request.damage, request.type], function(err, result) {
+						if(err) {
+							console.log(err);
+						}
+						else {
+							console.log(result);
+						}
+					})
+				}
+			});
+		}
 	}
 });
 
@@ -221,10 +368,6 @@ app.get('/index.html', function(req, res) {
 	});
 });
 
-app.get('/inventory.html', function(req, res) {
-	//lots to figure out here
-	res.render('inventory');
-});
 
 app.get('/monsters.html', function(req, res) {
 	con.query('SELECT * FROM monsters', function(err, result) {
@@ -290,6 +433,102 @@ app.get('/weapons.html', function(req, res) {
 			var context = {};
 			context.weapons = result;
 			res.render('weapons', context);
+		}
+	});
+});
+
+app.post('/deleteAccount', function(req, res) {
+	var request = req.body;
+	var sql = "DELETE FROM customer_account WHERE id=?";
+	con.query(sql, [request.id], function(err, result) {
+		if(err) {
+			console.log(err);
+		}
+		else {
+			console.log(result);
+		}
+	});
+});
+
+app.post('/deleteArmor', function(req, res) {
+	var request = req.body;
+	var sql = "DELETE FROM armor WHERE id=?";
+	con.query(sql, [request.id], function(err, result) {
+		if(err) {
+			console.log(err);
+		}
+		else {
+			console.log(result);
+			var itSql = "DELETE FROM items WHERE id=?";
+			con.query(itSql, [request.id], function(err, result) {
+				if(err) {
+					console.log(err);
+				} 
+				else {
+					console.log(result);
+				}
+			});
+		}
+	});
+});
+
+app.post('/deleteCharacter', function(req, res) {
+	var request = req.body;
+	var sql = "DELETE FROM characters WHERE id=?";
+	con.query(sql, [request.id], function(err, result) {
+		if(err) {
+			console.log(err);
+		}
+		else {
+			console.log(result);
+		}
+	});
+});
+
+app.post('/deleteMonster', function(req, res) {
+	var request = req.body;
+	var sql = "DELETE FROM monsters WHERE id=?";
+	con.query(sql, [request.id], function(err, result) {
+		if(err) {
+			console.log(err);
+		}
+		else {
+			console.log(result);
+		}
+	});
+});
+
+app.post('/deleteSpell', function(req, res) {
+	var request = req.body;
+	var sql = "DELETE FROM spells WHERE id=?";
+	con.query(sql, [request.id], function(err, result) {
+		if(err) {
+			console.log(err);
+		}
+		else {
+			console.log(result);
+		}
+	});
+});
+
+app.post('/deleteWeapon', function(req, res) {
+	var request = req.body;
+	var sql = "DELETE FROM weapons WHERE id=?";
+	con.query(sql, [request.id], function(err, result) {
+		if(err) {
+			console.log(err);
+		}
+		else {
+			console.log(result);
+			var itSql = "DELETE FROM items WHERE id=?";
+			con.query(itSql, [request.id], function(err, result) {
+				if(err) {
+					console.log(err);
+				} 
+				else {
+					console.log(result);
+				}
+			});
 		}
 	});
 });

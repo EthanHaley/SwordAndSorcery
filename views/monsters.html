@@ -40,15 +40,15 @@
 			<td>{{name}}</td>
 			<td>{{hit_points}}</td>
 			<td>{{exp_points}}</td>
-			<td><a href="editMonster.html" class="btn">Edit</a>
-				|<a data-toggle="modal" data-target="#deleteModal">Delete</button>
+			<td><a class="btn" onclick="editMonster({{id}})">Edit</a>
+				|<a class="btn" onclick="deleteMonster({{id}})">Delete</a>
 		  	</td>
 		  </tr>
 		{{/each}}
 		</tbody>
 	</table>
 	
-	<button type="button" class="btn" href="editChar.html">Create</a>	
+	<button type="button" class="btn" onclick="editMonster()">Create</button>
 		   
    
 	<!-- Modal -->

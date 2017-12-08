@@ -53,15 +53,15 @@
 			<td>{{resistance}}</td>
 			<td>{{description}}</td>
 			<td>
-				<a href="editArmor.html" class="btn">Edit</a>
-				|<a data-toggle="modal" data-target="#deleteModal">Delete</button>
+				<a class="btn" onclick="editArmor({{id}})">Edit</a>
+				|<a class="btn" onclick="deleteArmor({{id}})">Delete</a>
 			</td>
 		  </tr>
 		{{/each}}
 		</tbody>
 	</table>
 	
-	<button type="button" class="btn" href="editArmor.html">Create New Armor</button>
+	<button type="button" class="btn" onclick="editArmor()">Create New Armor</button>
    
 	<!-- Modal -->
 	<div id="deleteModal" class="modal fade" role="dialog">

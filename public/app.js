@@ -69,20 +69,22 @@ function editWeapon(weaponID) {
 	var context = {};
 	context.weaponID = weaponID;
 	context.isEdit = true;
-	console.log(context);
 	$('body').load('/editWeapon.html', context);
 }
 
-function saveAccount() {
+function saveAccount(accountID) {
 	var account = {};
+	account.id = accountID;
+	account.username = $('#username').val();
 	account.name = $('#name').val();
 	account.email = $('#email').val();
 	account.password = $('#password').val();
 	$.post('/editAccount.html', account);
 }
 
-function saveArmor() {
-	armor = {};
+function saveArmor(armorID) {
+	var armor = {};
+	armor.id = armorID;
 	armor.name = $('#name').val();
 	armor.type = $('#type').val();
 	armor.bonus = $('#bonus').val();
@@ -91,8 +93,9 @@ function saveArmor() {
 	$.post('/editArmor.html', armor);
 }
 
-function saveCharacter() {
+function saveCharacter(characterID) {
 	var character = {};
+	character.id = characterID;
 	character.level = $('#level').val();
 	character.name = $('#name').val();
 	character.class = $('#class').val();
@@ -101,16 +104,18 @@ function saveCharacter() {
 	$.post('/editCharacter.html', character);
 }
 
-function saveMonster() {
+function saveMonster(monsterID) {
 	var monster = {};
+	monster.id = monsterID;
 	monster.name = $('#name').val();
 	monster.hitpoints = $('#hitpoints').val();
 	monster.experience = $('#experience').val();
 	$.post('/editMonster.html', monster);
 }
 
-function saveSpell() {
+function saveSpell(spellID) {
 	var spell = {};
+	spell.id = spellID;
 	spell.name = $('#name').val();
 	spell.level = $('#level').val();
 	spell.description = $('#description').val();
@@ -126,6 +131,49 @@ function saveWeapon(weaponID) {
 	weapon.property = $('#property').val();
 	weapon.description = $('#description').val();
 	$.post('/editWeapon.html', weapon);
+	loadWeapons();
+}
+
+function deleteAccount(weaponID) {
+	var del = {};
+	del.id = weaponID;
+	$.post('/deleteAccount', del);
+	loadAccounts();
+}
+
+function deleteArmor(armorID) {
+	var del = {};
+	del.id = armorID;
+	$.post('/deleteArmor', del);
+	loadArmor();
+}
+
+function deleteCharacter(characterID) {
+	var del = {};
+	del.id = characterID;
+	$.post('/deleteCharacter', del);
+	loadCharacters();
+}
+
+function deleteMonster(monsterID) {
+	var del = {};
+	del.id = monsterID;
+	$.post('/deleteMonster', del);
+	loadMonsters();
+}
+
+function deleteSpell(spellID) {
+	var del = {};
+	del.id = spellID;
+	$.post('/deleteSpell', del);
+	loadSpells();
+}
+
+function deleteWeapon(weaponID) {
+	var del = {};
+	del.id = weaponID;
+	$.post('/deleteWeapon', del);
+	loadWeapons();
 }
 
 loadPage();
