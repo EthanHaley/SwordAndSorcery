@@ -78,8 +78,10 @@ CREATE TABLE weapons
                     properties          VARCHAR(100) NOT NULL,
                     damage_die          INT NOT NULL,
                     damage_type         VARCHAR(45) NOT NULL,
-                         PRIMARY KEY (id),
-                         FOREIGN KEY(id) REFERENCES items(id)
+                        PRIMARY KEY (id),
+                        FOREIGN KEY(id) REFERENCES items(id)
+				ON DELETE CASCADE
+				ON UPDATE CASCADE
                     );
 
 CREATE TABLE armor
@@ -91,6 +93,8 @@ CREATE TABLE armor
                     resistance         VARCHAR(45),
                     PRIMARY KEY(id),
                     FOREIGN KEY(id) REFERENCES items(id)
+				ON DELETE CASCADE
+				ON UPDATE CASCADE
                     );
 
 CREATE TABLE inventory
@@ -99,8 +103,12 @@ CREATE TABLE inventory
                     quantity          INT NOT NULL,
                     CHECK(quantity > 0),
                     PRIMARY KEY (character_id,item_id),
-                    FOREIGN KEY(character_id) REFERENCES characters(id),
+                    FOREIGN KEY(character_id) REFERENCES characters(id)
+		    		ON DELETE CASCADE
+				ON UPDATE CASCADE,
                     FOREIGN KEY(item_id) REFERENCES items(id)
+				ON DELETE CASCADE
+				ON UPDATE CASCADE
                     );
 
 CREATE TABLE monsters
@@ -114,6 +122,10 @@ CREATE TABLE monsters
                     );
 
 CREATE TABLE encounters
-                    (party_id          INT NOT NULL REFERENCES parties(id),
-                    monster_id         INT NOT NULL REFERENCES monsters(id),
+                    (party_id          INT NOT NULL REFERENCES parties(id)
+		    		ON DELETE CASCADE
+				ON UPDATE CASCADE,
+                    monster_id         INT NOT NULL REFERENCES monsters(id)
+		     		ON DELETE CASCADE
+				ON UPDATE CASCADE,
                     monster_deaths     INT NOT NULL
