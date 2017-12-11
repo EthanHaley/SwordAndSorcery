@@ -1,3 +1,11 @@
 body {
 	font-family: "Trebuchet MS";
 }
+
+li { 
+	cursor: pointer;
+}
+
+a {
+	cursor: pointer;
+}
