@@ -12,7 +12,7 @@ DROP TABLE IF EXISTS transactions;
 DROP TABLE IF EXISTS characters;
 
 CREATE TABLE customer_account
-                  (id            int NOT NULL AUTO_INCREMENT,
+                  (id            INT NOT NULL AUTO_INCREMENT,
                   username       VARCHAR(100) NOT NULL,
                   name           VARCHAR(45) NOT NULL,
                   email          VARCHAR(45) NOT NULL,
@@ -23,13 +23,14 @@ CREATE TABLE customer_account
                   );
 
 CREATE TABLE parties
-                  (id                int NOT NULL AUTO_INCREMENT,
+                  (id                INT NOT NULL AUTO_INCREMENT,
                   name               VARCHAR(100) NOT NULL,
+                  owner_id           INT NOT NULL REFERENCES customer_account(id) ON DELETE CASCADE,
                   PRIMARY KEY (id)
                   );
 
 CREATE TABLE transactions
-                  (id              int NOT NULL AUTO_INCREMENT,
+                  (id              INT NOT NULL AUTO_INCREMENT,
                   customer_id      INT NOT NULL REFERENCES customer_account(id) ON DELETE CASCADE,
                   amount           NUMERIC(5,2) NOT NULL,
                   CHECK(amount > 0),
@@ -39,7 +40,7 @@ CREATE TABLE transactions
                   );
 
 CREATE TABLE characters
-                  (id               int NOT NULL AUTO_INCREMENT,
+                  (id               INT NOT NULL AUTO_INCREMENT,
                   name              VARCHAR(100) NOT NULL,
                   party_id          INT NOT NULL REFERENCES parties(id) ON DELETE CASCADE,
                   customer_id       INT NOT NULL REFERENCES customer_account(id) ON DELETE CASCADE,
@@ -51,7 +52,7 @@ CREATE TABLE characters
                   );
 
 CREATE TABLE spells
-                  (id                  int NOT NULL AUTO_INCREMENT,
+                  (id                  INT NOT NULL AUTO_INCREMENT,
                   name                 VARCHAR(100) UNIQUE NOT NULL,
                   spell_level          INT NOT NULL,
                   description          VARCHAR(300) NOT NULL,
@@ -104,7 +105,7 @@ CREATE TABLE inventory
                     );
 
 CREATE TABLE monsters
-                    (id                int NOT NULL AUTO_INCREMENT,
+                    (id                INT NOT NULL AUTO_INCREMENT,
                     name               VARCHAR(100) NOT NULL,
                     hit_points         INT,
                     exp_points         INT,
