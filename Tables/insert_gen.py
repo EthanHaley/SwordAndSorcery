@@ -1,5 +1,5 @@
-#Creates a basic 'table.sql' and 'inserts.sql' files
-#  IMPORTANT: This will overwrite any file named 'table.sql' and 'inserts.sql'!
+#Creates 'inserts.sql' file
+#  IMPORTANT: This will overwrite any file named 'inserts.sql'!
 
 import openpyxl #!!required: pip install openyxl
 from random import randint
@@ -28,6 +28,7 @@ hit_die = [4,6,8,10,12,20] #Tweak: possibly unused
 races = ["Elf","Dwarf","Human","Halfling","Orc", "Dragonborn", "Tiefling", "Half-Elf", "Half-Orc"] # from PHB --Tweak
 classes = ["Paladin","Cleric","Wizard", "Rogue","Ranger", "Monk", "Sorcerer", "Druid", "Barbarian", "Bard"] # from PHB --Tweak
 sizes = ["Small", "Medium"] #from PHB, Tweak?
+
 
 # # customer_account(id, username, name, email, password, payment_rate)
 ##generate username, name, email, passwords, payment rates from data files
@@ -66,9 +67,10 @@ for i in range(num_trans):
 # # Parties(id, name)
 num_parties = (int(4000/7)+1)
 for i in range(num_parties):
-    g.write("INSERT INTO parties (name) VALUES('"+
-    misc_excel['A'+str(i+500)].value+" "+classes[randint(0,len(classes)-1)]+"s of "+misc_excel['F'+str(i+300)].value + # name #Tweak: Uniqueness not enforced
-    "');\r\n")
+    g.write("INSERT INTO parties (name, owner_id) VALUES('"+
+    misc_excel['A'+str(i+500)].value+" "+classes[randint(0,len(classes)-1)]+"s of "+misc_excel['F'+str(i+300)].value + "', "+# name #Tweak: Uniqueness not enforced
+    str(randint(1, num_customers-1)) +# customer_Id
+    ");\r\n")
 
 # # Characters(id, name, party_Id, customer_Id, race, class, level, size)
 num_chars = 2000 #arbitrary
@@ -190,10 +192,6 @@ max_armor_id = num_armor+num_items+num_weapons
 j = 0
 for i in range(max_weap_id,max_armor_id):
     resistance = armor_excel['E' + str(j+2)].value
-    # if(resistance =='Normal'):
-    #     resistance = 'Null'
-    # else:
-    #     resistance = "'"+resistance+"'"
 
     g.write("INSERT INTO armor (id, name, description, _type, bonus, resistance) VALUES("+
     str(i) + ", '" +  # id
@@ -211,22 +209,22 @@ for i in range(1, (num_chars*2)+1):
     g.write("INSERT INTO inventory VALUES(" +
     str(i)+ "," +# character_id
     str(randint(1, 19))+ "," +# item_Id
-    str(randint(1, 10))+# quantity #Tweak?: arbitrary, not smart
+    str(randint(1, 10))+# quantity
     ");\r\n")
     g.write("INSERT INTO inventory VALUES(" +
     str(i)+ "," +# character_id
     str(randint(20, 38))+ "," +# item_Id
-    str(randint(1, 10))+# quantity #Tweak?: arbitrary, not smart
+    str(randint(1, 10))+# quantity 
     ");\r\n")
     g.write("INSERT INTO inventory VALUES(" +
     str(i)+ "," +# character_id
     str(randint(39, 57))+ "," +# item_Id
-    str(randint(1, 10))+# quantity #Tweak?: arbitrary, not smart
+    str(randint(1, 10))+# quantity 
     ");\r\n")
     g.write("INSERT INTO inventory VALUES(" +
     str(i)+ "," +# character_id
     str(randint(58, 77))+ "," +# item_Id
-    str(randint(1, 10))+# quantity #Tweak?: arbitrary, not smart
+    str(randint(1, 10))+# quantity 
     ");\r\n")
 	
 g.close()
