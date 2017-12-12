@@ -5,7 +5,6 @@ import openpyxl #!!required: pip install openyxl
 from random import randint
 import random
 
-#f = open("table.sql","w")
 g = open("inserts.sql","w")
 
 #Excel I/O
