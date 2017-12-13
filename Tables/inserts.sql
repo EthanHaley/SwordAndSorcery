@@ -21489,7 +21489,7 @@ INSERT INTO items (name, description) VALUES('Kit of Thievery', 'Everything need
 INSERT INTO items (name, description) VALUES('Water Skin', '+25 HP');
 INSERT INTO items (name, description) VALUES('Clerical Pack', 'Everything needed for blessing');
 INSERT INTO items (name, description) VALUES('Fishing Pole', 'Great for fish-catching');
-INSERT INTO items (name, description) VALUES('Bedroll', 'Comfier than then the ground');
+INSERT INTO items (name, description) VALUES('Bedroll', 'Comfier than the ground');
 INSERT INTO items (name, description) VALUES('Explorer''s Pack', 'Never leave home without it');
 INSERT INTO items (name, description) VALUES('Horn', 'Boisterous and pointy');
 INSERT INTO items (name, description) VALUES('Tent', 'Because it rains sometimes');
