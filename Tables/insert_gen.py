@@ -1,11 +1,10 @@
-#Creates a basic 'table.sql' and 'inserts.sql' files
-#  IMPORTANT: This will overwrite any file named 'table.sql' and 'inserts.sql'!
+#Creates 'inserts.sql' file
+#  IMPORTANT: This will overwrite any file named 'inserts.sql'!
 
 import openpyxl #!!required: pip install openyxl
 from random import randint
 import random
 
-#f = open("table.sql","w")
 g = open("inserts.sql","w")
 
 #Excel I/O
@@ -30,155 +29,6 @@ races = ["Elf","Dwarf","Human","Halfling","Orc", "Dragonborn", "Tiefling", "Half
 classes = ["Paladin","Cleric","Wizard", "Rogue","Ranger", "Monk", "Sorcerer", "Druid", "Barbarian", "Bard"] # from PHB --Tweak
 sizes = ["Small", "Medium"] #from PHB, Tweak?
 
-# table_names = [
-# "customer_account",
-# "transactions",
-# "characters",
-# "spells_known",
-# "spells",
-# "inventory",
-# "items",
-# "weapons",
-# "armor",
-# "parties",
-# "encounters",
-# "monsters"]
-#
-# # #drop ifs: DROP TABLE IF EXISTS table CASCADE;
-# for i in range(len(table_names)):
-#     f.write("DROP TABLE IF EXISTS "+table_names[i]+" CASCADE;\n")
-# f.write("\n")
-# # # create tables
-# # customer_account(id, username, name, email, password, payment_rate)
-# create_ca = ("""CREATE TABLE """+table_names[0]+
-#                 """
-#                     (id            SERIAL PRIMARY KEY,
-#                     username       VARCHAR(100) NOT NULL,
-#                     name           VARCHAR(45) NOT NULL,
-#                     email          VARCHAR(45) NOT NULL,
-#                     password       VARCHAR(45) NOT NULL,
-#                     payment_rate   NUMERIC(2) NOT NULL
-#                     );""")
-# # parties(id, name)
-# create_parties = ("""CREATE TABLE """+table_names[9]+
-#                 """
-#                     (id                SERIAL PRIMARY KEY,
-#                     name               VARCHAR(100) NOT NULL
-#                     );""")
-# # transactions(id, fk customer_id, amount, date, status)
-# create_trans = ("CREATE TABLE "+table_names[1]+
-#                 """
-#                     (id              SERIAL PRIMARY KEY,
-#                     customer_id      INT NOT NULL REFERENCES customer_account(id),
-#                     amount           NUMERIC(2) NOT NULL,
-#                     _date            DATE NOT NULL,
-#                     status           VARCHAR(45) NOT NULL
-#                     );""")
-# # characters(id, name, fk party_id, fk customer_id, race, class, level, size)
-# create_chars = ("""CREATE TABLE """+table_names[2]+
-#                 """
-#                     (id               SERIAL PRIMARY KEY,
-#                     name              VARCHAR(100) NOT NULL,
-#                     party_id          INT NOT NULL REFERENCES parties(id),
-#                     customer_id       INT NOT NULL REFERENCES customer_account(id),
-#                     race              VARCHAR(45) NOT NULL,
-#                     _class            VARCHAR(45) NOT NULL,
-#                     _level            INT NOT NULL,
-#                     _size             VARCHAR(45) NOT NULL
-#                     );""")
-# # spells(id, name, spell level, description)
-# create_spells = ("""CREATE TABLE """+table_names[4]+
-#                 """
-#                     (id                  SERIAL PRIMARY KEY,
-#                     name                 VARCHAR(100) UNIQUE NOT NULL,
-#                     spell_level          INT NOT NULL,
-#                     description          VARCHAR(300) NOT NULL
-#                     );""")
-# # spells_known(fk character_id, fk spell_id)
-# #Tweak: character spells do not yet match level
-# create_spells_known = ("""CREATE TABLE """+table_names[3]+ #currently allow multiple of same spell to each character, need to make composite key
-#                 """
-#                     (character_id     INT NOT NULL REFERENCES characters(id),
-#                     spell_id          INT NOT NULL REFERENCES spells(id),
-#                     PRIMARY KEY (character_id, spell_id)
-#                     );""")
-# # items(id, name, description), all info comes from excel files
-# create_items = ("""CREATE TABLE """+table_names[6]+
-#                 """
-#                     (id                 SERIAL UNIQUE NOT NULL,
-#                     name                VARCHAR(100) NOT NULL,
-#                     description         VARCHAR(300) NOT NULL,
-# 					PRIMARY KEY(id, name, description)
-#                     );""")
-# # # weapons(fk Id, fk name, fk description, properties, damage die, damage type)
-# create_weaps = ("""CREATE TABLE """+table_names[7]+
-#                 """
-#                     (id                 INT NOT NULL,
-#                     name                VARCHAR(100) NOT NULL,
-#                     description         VARCHAR(300) NOT NULL,
-#                     properties          VARCHAR(100) NOT NULL,
-#                     damage_die          INT NOT NULL,
-#                     damage_type         VARCHAR(45) NOT NULL,
-# 					PRIMARY KEY (id,name,description),
-# 					FOREIGN KEY(id,name,description) REFERENCES items(id,name,description)
-#                     );""")
-# # # armor(Id, name, description, type, bonus, resistance)
-# create_arm = ("""CREATE TABLE """+table_names[8]+
-#                 """
-#                     (id                INT NOT NULL,
-#                     name               VARCHAR(100) NOT NULL,
-#                     description        VARCHAR(300) NOT NULL,
-#                     _type              VARCHAR(45) NOT NULL,
-#                     bonus              VARCHAR(45),
-#                     resistance         VARCHAR(45),
-#                     PRIMARY KEY(id, name, description),
-# 		    FOREIGN KEY(id, name, description) REFERENCES items(id, name, description)
-#                     );""")
-#
-# # inventory(fk character_id, fk item_id, quantity)
-# create_inv = ("""CREATE TABLE """+table_names[5]+
-#                 """
-#                     (character_id     INT NOT NULL REFERENCES characters(id),
-#                     item_id           INT NOT NULL  REFERENCES items(id),
-#                     quantity          INT NOT NULL,
-#                     CHECK(quantity > 0),
-#                     PRIMARY KEY (character_id,item_id),
-# 		    FOREIGN KEY(character_id) REFERENCES characters(id),
-# 		    FOREIGN KEY(item_id) REFERENCES items(id)
-#                     );""")
-#
-# # monsters(id, name, hit_points, exp_points)
-# create_monsters = ("""CREATE TABLE """+table_names[11]+
-#                 """
-#                     (id                SERIAL PRIMARY KEY,
-#                     name               VARCHAR(100) NOT NULL,
-#                     hit_points         INT,
-#                     exp_points         INT,
-#                     CHECK(hit_points > 0),
-#                     CHECK(exp_points > 0)
-#                     );""")
-#
-# # encounters(fk party_id, fk monster_id, monster_deaths)
-# # Tweak: Needs composite key
-# create_enc = ("""CREATE TABLE """+table_names[10]+
-#                 """
-#                     (party_id          INT NOT NULL REFERENCES parties(id),
-#                     monster_id         INT NOT NULL REFERENCES monsters(id),
-#                     monster_deaths     INT NOT NULL
-#                     );""")
-#
-#
-# table_arr = [create_ca, create_parties, create_trans, create_chars,
-#              create_spells, create_spells_known,
-#              create_items, create_weaps, create_arm,
-#              create_inv, create_monsters, create_enc
-#              ]
-#
-# for i in range(len(table_arr)):
-#     f.write(table_arr[i]+"\r\n")
-#
-#f.close()
-###end table creation
 
 # # customer_account(id, username, name, email, password, payment_rate)
 ##generate username, name, email, passwords, payment rates from data files
@@ -217,9 +67,10 @@ for i in range(num_trans):
 # # Parties(id, name)
 num_parties = (int(4000/7)+1)
 for i in range(num_parties):
-    g.write("INSERT INTO parties (name) VALUES('"+
-    misc_excel['A'+str(i+500)].value+" "+classes[randint(0,len(classes)-1)]+"s of "+misc_excel['F'+str(i+300)].value + # name #Tweak: Uniqueness not enforced
-    "');\r\n")
+    g.write("INSERT INTO parties (name, owner_id) VALUES('"+
+    misc_excel['A'+str(i+500)].value+" "+classes[randint(0,len(classes)-1)]+"s of "+misc_excel['F'+str(i+300)].value + "', "+# name #Tweak: Uniqueness not enforced
+    str(randint(1, num_customers-1)) +# customer_Id
+    ");\r\n")
 
 # # Characters(id, name, party_Id, customer_Id, race, class, level, size)
 num_chars = 2000 #arbitrary
@@ -341,10 +192,6 @@ max_armor_id = num_armor+num_items+num_weapons
 j = 0
 for i in range(max_weap_id,max_armor_id):
     resistance = armor_excel['E' + str(j+2)].value
-    # if(resistance =='Normal'):
-    #     resistance = 'Null'
-    # else:
-    #     resistance = "'"+resistance+"'"
 
     g.write("INSERT INTO armor (id, name, description, _type, bonus, resistance) VALUES("+
     str(i) + ", '" +  # id
@@ -362,22 +209,22 @@ for i in range(1, (num_chars*2)+1):
     g.write("INSERT INTO inventory VALUES(" +
     str(i)+ "," +# character_id
     str(randint(1, 19))+ "," +# item_Id
-    str(randint(1, 10))+# quantity #Tweak?: arbitrary, not smart
+    str(randint(1, 10))+# quantity
     ");\r\n")
     g.write("INSERT INTO inventory VALUES(" +
     str(i)+ "," +# character_id
     str(randint(20, 38))+ "," +# item_Id
-    str(randint(1, 10))+# quantity #Tweak?: arbitrary, not smart
+    str(randint(1, 10))+# quantity 
     ");\r\n")
     g.write("INSERT INTO inventory VALUES(" +
     str(i)+ "," +# character_id
     str(randint(39, 57))+ "," +# item_Id
-    str(randint(1, 10))+# quantity #Tweak?: arbitrary, not smart
+    str(randint(1, 10))+# quantity 
     ");\r\n")
     g.write("INSERT INTO inventory VALUES(" +
     str(i)+ "," +# character_id
     str(randint(58, 77))+ "," +# item_Id
-    str(randint(1, 10))+# quantity #Tweak?: arbitrary, not smart
+    str(randint(1, 10))+# quantity 
     ");\r\n")
 	
 g.close()
